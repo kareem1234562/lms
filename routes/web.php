@@ -59,10 +59,10 @@ Route::group(['prefix'=>'trainers'], function(){
     Route::get('/',[TrainersController::class, 'index'])->name('website.trainers');
     Route::get('/{id}/details',[TrainersController::class, 'details'])->name('website.trainers.details');
 });
-Route::group(['prefix'=>'blog'], function(){
-    Route::get('/',[BlogController::class, 'index'])->name('website.blog');
-    Route::get('/{id}/details',[BlogController::class, 'details'])->name('website.blog.details');
-});
+// Route::group(['prefix'=>'blog'], function(){
+//     Route::get('/',[BlogController::class, 'index'])->name('website.blog');
+//     Route::get('/{id}/details',[BlogController::class, 'details'])->name('website.blog.details');
+// });
 Route::group(['prefix'=>'ajax'], function(){
     Route::get('/GetUniversityList',[CurriculumsController::class, 'GetUniversityList'])->name('website.ajax.GetUniversityList');
 });

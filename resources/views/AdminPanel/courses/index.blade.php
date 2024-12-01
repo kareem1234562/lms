@@ -22,10 +22,10 @@
                             @forelse($courses as $course)
                                 <tr id="row_{{$course->id}}">
                                     <td>
-                                        {{$course['name']}}
+                                        {{$course->name}}
                                     </td>
                                     <td class="text-center">
-                                        {{$course['price']}}
+                                        {{$course->price}}
                                     </td>
                                     <td class="text-center">
                                         <a href="{{route('admin.courses.lessons',$course->id)}}" class="btn btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="{{trans('learning.lessons')}}">
@@ -34,12 +34,12 @@
                                         <a href="javascript:;" data-bs-target="#editcourse{{$course->id}}" data-bs-toggle="modal" class="btn btn-icon btn-info" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="{{trans('common.edit')}}">
                                             <i data-feather='edit'></i>
                                         </a>
-                                        @if($course->canDelete())
+
                                             <?php $delete = route('admin.courses.delete',['id'=>$course->id]); ?>
                                             <button type="button" class="btn btn-icon btn-danger" onclick="confirmDelete('{{$delete}}','{{$course->id}}')">
                                                 <i data-feather='trash-2'></i>
                                             </button>
-                                        @endif
+
                                     </td>
                                 </tr>
                             @empty
@@ -111,7 +111,7 @@
                         </div>
                         <div class="col-12 col-md-3">
                             <label class="form-label" for="instructor_id">المحاضر</label>
-                            {{Form::select('instructor_id[]',instructorsList(),$course->instructor_ids(),['id'=>'instructor_id', 'class'=>'selectpicker','multiple'])}}
+                            {{Form::select('instructor_id[]',instructorsList(),['id'=>'instructor_id', 'class'=>'selectpicker','multiple'])}}
                         </div>
                         <div class="col-12"></div>
                         <div class="col-12 col-md-12">
@@ -137,7 +137,7 @@
                                 <div class="file-loading">
                                     <input class="files" name="photo" type="file">
                                 </div>
-                                <img src="{{$course->photoLink()}}" alt="" height="60">
+                                <img src="{{$course->photo}}" alt="" height="60">
                             </div>
                         </div>
 

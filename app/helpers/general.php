@@ -1,4 +1,55 @@
 <?php
+
+if (!function_exists('endsWithAllowedExtensions')) {
+    function endsWithAllowedExtensions($filename)
+    {
+        // Define the allowed extensions
+        $allowedExtensions = ['.mb4', '.png', '.mb3'];
+
+        // Check if the filename ends with any of the allowed extensions
+        foreach ($allowedExtensions as $extension) {
+            if (Str::endsWith($filename, $extension)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+function getFileType($fileName) {
+    // Get the file extension
+    $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+    // Define arrays for supported image, video, and audio extensions
+    $imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    $videoExtensions = ['mp4', 'webm', 'ogg'];
+    $audioExtensions = ['mp3', 'wav', 'ogg'];
+
+    // Check the type of file based on its extension
+    if (in_array($fileExtension, $imageExtensions)) {
+        return 'image';
+    } elseif (in_array($fileExtension, $videoExtensions)) {
+        return 'video';
+    } elseif (in_array($fileExtension, $audioExtensions)) {
+        return 'audio';
+    } else {
+        return 'unknown'; // For unsupported or unknown file types
+    }
+}
+
+if (!function_exists('is_text')) {
+    function is_text($value) {
+        // Check if the value is not a file extension and is a string
+        return !is_file($value) && is_string($value);
+    }
+}
+
+if (!function_exists('is_file')) {
+    function is_file($value) {
+        // Check if the value represents a file path
+        return $value && file_exists(public_path('uploads/OptionsCourse/' . $value));
+    }
+}
 function DayMonthOnly($your_date)
 {
     $months = array("Jan" => "يناير",
@@ -66,6 +117,8 @@ function panelLangMenu()
     $list = [];
     $locales = Config::get('app.locales');
 
+    $selected = null;
+
     if (Session::get('Lang') != 'ar') {
         $list[] = [
             'flag' => 'sa',
@@ -110,7 +163,11 @@ function contractsList()
 }
 function instructorsList()
 {
-    return App\Models\User::where('role',2)->orderBy('id','desc')->pluck('name','id')->all();
+    return App\Models\NewInstructors::orderBy('id','desc')->pluck('name','id')->all();
+}
+function chapters($id)
+{
+    return App\Models\Chapters::where('id',$id)->orderBy('id','desc')->pluck('number','id')->all();
 }
 function sectionsList()
 {

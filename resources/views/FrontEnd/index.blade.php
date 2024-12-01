@@ -23,12 +23,10 @@
                                                 <a href="{{route('website.courses')}}" class="default-btn border-radius-50">
                                                     {{trans('learning.FreeCourses')}}
                                                 </a>
-                                                <?php $random_coin_q = App\Models\CoinsQs::inRandomOrder()->first(); ?>
-                                                @if ($random_coin_q != '')
-                                                    <button type="button" class="default-btn border-radius-50" data-bs-toggle="modal" data-bs-target="#coinsModal">
-                                                        {{trans('learning.FreePoints')}}
-                                                    </button>
-                                                @endif
+
+
+<!-- this delete -->
+
                                             </div>
 
                                             <div class="footer-widget mt-2">
@@ -111,54 +109,7 @@
         </div>
         <!-- Hero Slider Area End -->
 
-        @if ($random_coin_q != '')
-            <div class="modal fade" id="coinsModal" tabindex="-1" aria-labelledby="coinsModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <form class="auth-login-form mt-2" action="{{ route('loggedoutCoins') }}" method="POST">
-                            <div class="modal-body">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-3">
-                                        <img src="{{asset('FrontendAssets/assets/images/noor.png')}}" alt="">
-                                    </div>
-                                    <div class="col-9 pt-4">
-                                        <h4>{{$random_coin_q['name_'.session()->get('Lang')]}}</h4>
-                                        {!! Form::hidden('q_id', $random_coin_q['id']) !!}
-                                        @for ($i=1; $i < 5; $i++)
-                                            @if ($random_coin_q['answer'.$i.'_'.session()->get('Lang')] != '')
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" value="{{$i}}" name="coinAnswer" id="coinAnswer{{$i}}">
-                                                    <label class="form-check-label" for="coinAnswer{{$i}}">
-                                                        {{$random_coin_q['answer'.$i.'_'.session()->get('Lang')]}}
-                                                    </label>
-                                                </div>
-                                            @endif
-                                        @endfor
-                                        <div class="col-12">
-                                            <button type="submit" class="default-btn">{{trans('common.Save Changes')}}</button>
-                                        </div>
-                                    </div>
-                                    {{-- <div class="col-lg-12 ">
-                                        <div class="form-group">
-                                            <label for="email" class="mb-1">{{trans('common.email')}}</label>
-                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{trans('common.email')}}" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div> --}}
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-        @endif
+  
 
 @stop
 

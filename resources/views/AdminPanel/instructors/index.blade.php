@@ -116,11 +116,11 @@
                             {{Form::text('behance',$instructor->behance,['id'=>'behance', 'class'=>'form-control'])}}
                         </div>
                         <div class="col-12"></div>
-                             
+
                         <div class="row d-flex justify-content-center">
                             <div class="col-md-12">
                                 <label class="form-label" for="photo">صورة</label>
-                                <div class="file-loading"> 
+                                <div class="file-loading">
                                     <input class="files" name="photo" type="file">
                                 </div>
                                 <img src="{{$instructor->photoLink()}}" alt="" height="60">
@@ -205,7 +205,7 @@
                         <div class="row d-flex justify-content-center">
                             <div class="col-md-12">
                                 <label class="form-label" for="photo">صورة</label>
-                                <div class="file-loading"> 
+                                <div class="file-loading">
                                     <input class="files" name="photo" type="file">
                                 </div>
                             </div>

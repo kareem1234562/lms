@@ -94,6 +94,7 @@
                     </a>
                 </li>
             @endif
+
             @if(userCan('courses_view') || userCan('courses_bundles_view') || userCan('courses_groups_view'))
                 <li class=" nav-item">
                     <a class="d-flex align-items-center" href="#">
@@ -126,6 +127,28 @@
                     </ul>
                 </li>
             @endif
+
+
+
+
+
+
+            @if(userCan('courses_view'))
+                            <li @if(isset($active) && $active == 'new courses') class="active" @endif>
+                                <a class="d-flex align-items-center" href="{{route('admin.newCourse')}}">
+                                    <i data-feather="circle"></i>
+                                    <span class="menu-item text-truncate" data-i18n="{{trans('common.courses')}}">
+                                        الدورات التدريبية الجديدة
+                                    </span>
+                                </a>
+                            </li>
+                        @endif
+
+
+
+
+
+
             @if(userCan('pages_view'))
                 <li class="nav-item @if(isset($active) && $active == 'pages') active @endif">
                     <a class="d-flex align-items-center" href="{{route('admin.pages.index')}}">
