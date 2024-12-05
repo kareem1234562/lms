@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\HistoryQuizes;
 use App\Models\SeperateQuiz as ModelsSeperateQuiz;
 use Illuminate\Http\Request;
 use Response;
@@ -52,6 +53,9 @@ class SeperateQuiz extends Controller
         $quiz=ModelsSeperateQuiz::create($data);
 
         if($quiz){
+            $history=HistoryQuizes::create($data);
+            $history->seperate_id=$quiz->id;
+            $history->save();
             return redirect()->back()->with('success', 'تم اضافة الدرس بنجاح');
         }else{
             return redirect()->back()->with('faild', 'فشلت عملية الاضافة');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QuestionHistoryController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\admin\AdminPanelController;
@@ -38,6 +39,7 @@ use App\Http\Controllers\QuestionLessonController;
 use App\Http\Controllers\QuestionQuizCourse;
 use App\Http\Controllers\questionseperateController;
 use App\Http\Controllers\QuizCourseController;
+use App\Http\Controllers\QuizHistoryController;
 use App\Http\Controllers\QuizLessonController;
 use App\Http\Controllers\SeperateQuiz;
 use App\Models\QuestionSeperate;
@@ -70,6 +72,21 @@ Route::post('/{id}/update',[questionseperateController::class,'update'])->name('
 
 });
 });
+
+Route::group(['prefix'=>'history_quizes'],function(){
+    Route::get('/quiz_history',[QuizHistoryController::class,'index'])->name('newcourse.quiz_history.show');
+    Route::get('/{id}/delete',[QuizHistoryController::class,'delete'])->name('newcourse.quiz_history.delete');
+    Route::post('/{id}/store',[QuizHistoryController::class,'store'])->name('newcourse.quiz_history.store');
+    Route::post('/{id}/update',[QuizHistoryController::class,'update'])->name('newcourse.quiz_history.update');
+
+    Route::group(['prefix'=>'question_history'],function(){
+        Route::get('/{id}/question_history',[QuestionHistoryController::class,'index'])->name('newcourse.question_history.show');
+        Route::get('/{id}/delete',[QuestionHistoryController::class,'delete'])->name('newcourse.question_history.delete');
+        Route::post('/{id}/store',[QuestionHistoryController::class,'store'])->name('newcourse.question_history.store');
+        Route::post('/{id}/update',[QuestionHistoryController::class,'update'])->name('newcourse.question_history.update');
+    });
+
+    });
 
 
 

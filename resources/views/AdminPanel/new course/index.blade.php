@@ -180,6 +180,9 @@
 @stop
 
 @section('page_buttons')
+<a href="{{route('newcourse.quiz_history.show')}}" class="btn btn-primary btn-sm">
+            History
+        </a>
 <a href="{{route('newcourse.quizes_seperate.show')}}" class="btn btn-primary btn-sm">
             كويز منفصل
         </a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\HistoryQuizes;
 use App\Models\NewCourses;
 use App\Models\QuizCourse;
 use App\Models\QuizLesson;
@@ -53,15 +54,20 @@ class QuizCourseController extends Controller
 
         $data['icon']=upload_file('quizescourse/icons', $request->icon);
 
-
         $quiz=QuizCourse::create($data);
 
         if($quiz){
-            return redirect()->back()->with('success', 'تم اضافة الدرس بنجاح');
+            $history=HistoryQuizes::create($data);
+            if($history){
+              $history->update([
+                'course_id'=>$quiz->id,
+              ]);
+              return redirect()->back()->with('success', 'تم اضافة الدرس بنجاح');
+            }
+
         }else{
             return redirect()->back()->with('faild', 'فشلت عملية الاضافة');
         }
-        //
     }
 
     /**

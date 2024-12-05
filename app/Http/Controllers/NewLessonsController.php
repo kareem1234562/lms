@@ -64,6 +64,7 @@ class NewLessonsController extends Controller
             $data['chapter_id']=null;
         }else{
             $data['chapter_id']=$chapter_id;
+
         }
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\HistoryQuizes;
 use App\Models\New_Lessons;
 use App\Models\QuizLesson;
 use Illuminate\Http\Request;
@@ -56,7 +57,14 @@ class QuizLessonController extends Controller
         $quiz=QuizLesson::create($data);
 
         if($quiz){
-            return redirect()->back()->with('success', 'تم اضافة الدرس بنجاح');
+            $history=HistoryQuizes::create($data);
+            if($history){
+              $history->update([
+                'lesson_id'=>$quiz->id,
+              ]);
+              return redirect()->back()->with('success', 'تم اضافة الدرس بنجاح');
+            }
+
         }else{
             return redirect()->back()->with('faild', 'فشلت عملية الاضافة');
         }
