@@ -55,7 +55,7 @@ class QuestionHistoryController extends Controller
             $questions=$seperate_quiz->questions()->paginate(10);
             return view('AdminPanel.questionhistory.index',[
                 'active' => 'new courses',
-                'title' => 'question history ',
+                'title' => 'question history',
 
                 'questions' => $questions,
                 'breadcrumbs' => [

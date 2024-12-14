@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:4306
--- Generation Time: 06 نوفمبر 2024 الساعة 13:45
--- إصدار الخادم: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: Dec 14, 2024 at 01:23 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,29 +18,37 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `uniford`
+-- Database: `lms`
 --
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `coins_qs`
+-- Table structure for table `chapters`
 --
--- Error reading structure for table uniford.coins_qs: #1932 - Table &#039;uniford.coins_qs&#039; doesn&#039;t exist in engine
--- Error reading data for table uniford.coins_qs: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `uniford`.`coins_qs`&#039; at line 1
+
+CREATE TABLE `chapters` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `icon` varchar(191) NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `number` varchar(191) NOT NULL,
+  `course_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `chapters`
+--
+
+INSERT INTO `chapters` (`id`, `icon`, `name`, `number`, `course_id`, `created_at`, `updated_at`) VALUES
+(1, '1734175583.png', 'chapter', '1', 1, '2024-12-14 11:26:23', '2024-12-14 11:26:23'),
+(2, '1734175594.png', 'chapter', '2', 1, '2024-12-14 11:26:35', '2024-12-14 11:26:35');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `colleges`
---
--- Error reading structure for table uniford.colleges: #1932 - Table &#039;uniford.colleges&#039; doesn&#039;t exist in engine
--- Error reading data for table uniford.colleges: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `uniford`.`colleges`&#039; at line 1
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `contact_messages`
+-- Table structure for table `contact_messages`
 --
 
 CREATE TABLE `contact_messages` (
@@ -62,7 +70,7 @@ CREATE TABLE `contact_messages` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `contact_messages`
+-- Dumping data for table `contact_messages`
 --
 
 INSERT INTO `contact_messages` (`id`, `name`, `company`, `title`, `country`, `address`, `phone`, `email`, `subject`, `content`, `status`, `user_id`, `user_type`, `created_at`, `updated_at`) VALUES
@@ -5211,7 +5219,7 @@ INSERT INTO `contact_messages` (`id`, `name`, `company`, `title`, `country`, `ad
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `countries`
+-- Table structure for table `countries`
 --
 
 CREATE TABLE `countries` (
@@ -5228,7 +5236,7 @@ CREATE TABLE `countries` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `countries`
+-- Dumping data for table `countries`
 --
 
 INSERT INTO `countries` (`id`, `iso`, `name_ar`, `name_en`, `nicename`, `iso3`, `numcode`, `phonecode`, `created_at`, `updated_at`) VALUES
@@ -5238,7 +5246,7 @@ INSERT INTO `countries` (`id`, `iso`, `name_ar`, `name_en`, `nicename`, `iso3`, 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `courses`
+-- Table structure for table `courses`
 --
 
 CREATE TABLE `courses` (
@@ -5273,7 +5281,7 @@ CREATE TABLE `courses` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `courses`
+-- Dumping data for table `courses`
 --
 
 INSERT INTO `courses` (`id`, `name`, `price`, `hours`, `sessions`, `weekly_sessions`, `normal_group_students`, `private_price`, `online_price`, `created_at`, `updated_at`, `photo`, `sharing_photo`, `details_ar`, `details_en`, `duration_hours`, `duration_lectures`, `session_duration`, `instructor_id`, `seo_title`, `seo_description`, `seo_keywords`, `section_id`, `country_id`, `university_id`, `college_id`, `is_course`, `coins`) VALUES
@@ -5574,7 +5582,7 @@ INSERT INTO `courses` (`id`, `name`, `price`, `hours`, `sessions`, `weekly_sessi
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `courses_bundles`
+-- Table structure for table `courses_bundles`
 --
 
 CREATE TABLE `courses_bundles` (
@@ -5588,7 +5596,7 @@ CREATE TABLE `courses_bundles` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `courses_bundles`
+-- Dumping data for table `courses_bundles`
 --
 
 INSERT INTO `courses_bundles` (`id`, `name`, `from_date`, `to_date`, `price`, `created_at`, `updated_at`) VALUES
@@ -5598,7 +5606,7 @@ INSERT INTO `courses_bundles` (`id`, `name`, `from_date`, `to_date`, `price`, `c
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `courses_bundles_items`
+-- Table structure for table `courses_bundles_items`
 --
 
 CREATE TABLE `courses_bundles_items` (
@@ -5612,7 +5620,7 @@ CREATE TABLE `courses_bundles_items` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `courses_bundles_items`
+-- Dumping data for table `courses_bundles_items`
 --
 
 INSERT INTO `courses_bundles_items` (`id`, `bundle_id`, `course_id`, `original_price`, `bundle_price`, `created_at`, `updated_at`) VALUES
@@ -5624,7 +5632,7 @@ INSERT INTO `courses_bundles_items` (`id`, `bundle_id`, `course_id`, `original_p
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `courses_sections`
+-- Table structure for table `courses_sections`
 --
 
 CREATE TABLE `courses_sections` (
@@ -5638,7 +5646,7 @@ CREATE TABLE `courses_sections` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `courses_sections`
+-- Dumping data for table `courses_sections`
 --
 
 INSERT INTO `courses_sections` (`id`, `name_ar`, `name_en`, `icon`, `photo`, `created_at`, `updated_at`) VALUES
@@ -5652,7 +5660,7 @@ INSERT INTO `courses_sections` (`id`, `name_ar`, `name_en`, `icon`, `photo`, `cr
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `course_group_times`
+-- Table structure for table `course_group_times`
 --
 
 CREATE TABLE `course_group_times` (
@@ -5667,7 +5675,7 @@ CREATE TABLE `course_group_times` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `course_group_times`
+-- Dumping data for table `course_group_times`
 --
 
 INSERT INTO `course_group_times` (`id`, `course_id`, `group_id`, `day`, `time_from`, `time_to`, `created_at`, `updated_at`) VALUES
@@ -5707,15 +5715,7 @@ INSERT INTO `course_group_times` (`id`, `course_id`, `group_id`, `day`, `time_fr
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `course_lessons`
---
--- Error reading structure for table uniford.course_lessons: #1932 - Table &#039;uniford.course_lessons&#039; doesn&#039;t exist in engine
--- Error reading data for table uniford.course_lessons: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `uniford`.`course_lessons`&#039; at line 1
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `course_offers`
+-- Table structure for table `course_offers`
 --
 
 CREATE TABLE `course_offers` (
@@ -5730,15 +5730,7 @@ CREATE TABLE `course_offers` (
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `course_sections`
---
--- Error reading structure for table uniford.course_sections: #1932 - Table &#039;uniford.course_sections&#039; doesn&#039;t exist in engine
--- Error reading data for table uniford.course_sections: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `uniford`.`course_sections`&#039; at line 1
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `course_trainers`
+-- Table structure for table `course_trainers`
 --
 
 CREATE TABLE `course_trainers` (
@@ -5752,7 +5744,7 @@ CREATE TABLE `course_trainers` (
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `failed_jobs`
+-- Table structure for table `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -5767,7 +5759,34 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `migrations`
+-- Table structure for table `history_quizes`
+--
+
+CREATE TABLE `history_quizes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `icon` varchar(255) DEFAULT NULL,
+  `course_id` varchar(191) DEFAULT NULL,
+  `seperate_id` varchar(11) DEFAULT NULL,
+  `lesson_id` varchar(191) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `history_quizes`
+--
+
+INSERT INTO `history_quizes` (`id`, `name`, `icon`, `course_id`, `seperate_id`, `lesson_id`, `created_at`, `updated_at`) VALUES
+(3, 'quiz seperate', '1734177027.png', NULL, '9', NULL, '2024-12-14 11:50:27', '2024-12-14 11:50:27'),
+(4, 'quiz for first lesson', '1734177257.png', NULL, NULL, '1', '2024-12-14 11:54:17', '2024-12-14 11:54:17'),
+(5, 'quiz1', '1734177272.png', NULL, NULL, '2', '2024-12-14 11:54:32', '2024-12-14 11:54:32'),
+(6, 'quiz for cousre python', '1734177896.png', '1', NULL, NULL, '2024-12-14 12:04:56', '2024-12-14 12:04:56');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -5777,7 +5796,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -5817,12 +5836,130 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (117, '2023_11_16_163908_create_colleges_table', 13),
 (118, '2023_11_17_170817_create_course_sections_table', 14),
 (119, '2023_11_17_215235_create_course_lessons_table', 14),
-(120, '2023_11_18_145427_create_coins_qs_table', 15);
+(120, '2023_11_18_145427_create_coins_qs_table', 15),
+(121, '2023_11_29_221642_create_user_transactions_table', 16),
+(122, '2023_11_29_221702_create_orders_table', 16),
+(123, '2023_11_29_221708_create_order_items_table', 16),
+(124, '2023_11_29_231323_create_transaction_requests_table', 16),
+(125, '2024_11_17_194730_create_new_instructors_table', 16),
+(126, '2024_11_17_194801_create_new_courses_table', 16),
+(127, '2024_11_17_195104_create_new_instructors_new_courses_table', 16),
+(128, '2024_11_23_113311_create_chapters_table', 16),
+(129, '2024_11_23_121108_create_new__lessons_table', 16),
+(130, '2024_11_23_135711_create_quiz_lessons_table', 16),
+(131, '2024_11_23_141209_create_quiz_courses_table', 16),
+(132, '2024_11_23_142216_create_seperate_quizzes_table', 16),
+(133, '2024_11_23_203824_create_history_quizes_table', 16),
+(134, '2024_11_26_191828_add_assigned_at_to_new_instructors_new_courses_table', 16),
+(135, '2024_11_27_110043_create_question_courses_table', 16),
+(136, '2024_11_27_121609_create_question_lessons_table', 16),
+(137, '2024_12_01_090959_create_question_seperates_table', 16);
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `notifications`
+-- Table structure for table `new_courses`
+--
+
+CREATE TABLE `new_courses` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `photo` varchar(191) NOT NULL,
+  `price` varchar(191) NOT NULL,
+  `Discounted_Price` varchar(191) NOT NULL,
+  `Instructors` varchar(191) NOT NULL,
+  `Description` varchar(191) NOT NULL,
+  `Explanatory_Video` varchar(191) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `new_courses`
+--
+
+INSERT INTO `new_courses` (`id`, `name`, `photo`, `price`, `Discounted_Price`, `Instructors`, `Description`, `Explanatory_Video`, `created_at`, `updated_at`) VALUES
+(1, 'python', '1734174427.png', '120', '100', '[\"2\",\"1\"]', 'this', '1734174428.mp4', '2024-12-14 11:07:08', '2024-12-14 11:18:45');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `new_instructors`
+--
+
+CREATE TABLE `new_instructors` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `email` varchar(191) NOT NULL,
+  `Photo` varchar(191) NOT NULL,
+  `Specialization` varchar(191) NOT NULL,
+  `Phone` varchar(191) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `new_instructors`
+--
+
+INSERT INTO `new_instructors` (`id`, `name`, `email`, `Photo`, `Specialization`, `Phone`, `created_at`, `updated_at`) VALUES
+(1, 'Kareem Elsum', 'karimelsum@gmail.com', '1734174253.png', 'cs', '01212390055', '2024-12-14 11:04:14', '2024-12-14 11:04:14'),
+(2, 'ahmed', 'ahmed@gmail', '1734174295.png', 'cs', '01212390033', '2024-12-14 11:04:55', '2024-12-14 11:04:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `new_instructors_new_courses`
+--
+
+CREATE TABLE `new_instructors_new_courses` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `new_instructors_id` bigint(20) UNSIGNED NOT NULL,
+  `new_courses_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `new_instructors_new_courses`
+--
+
+INSERT INTO `new_instructors_new_courses` (`id`, `new_instructors_id`, `new_courses_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, NULL, NULL),
+(8, 2, 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `new__lessons`
+--
+
+CREATE TABLE `new__lessons` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `icon` varchar(191) NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `stream_link` varchar(191) NOT NULL,
+  `video` varchar(191) NOT NULL,
+  `file` varchar(191) NOT NULL,
+  `number` varchar(191) NOT NULL,
+  `chapter_id` bigint(20) UNSIGNED NOT NULL,
+  `course_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `new__lessons`
+--
+
+INSERT INTO `new__lessons` (`id`, `icon`, `name`, `stream_link`, `video`, `file`, `number`, `chapter_id`, `course_id`, `created_at`, `updated_at`) VALUES
+(1, '1734175807.png', 'lesson', 'link', '1734177687.mp4', '1734175807.png', '1', 1, 1, '2024-12-14 11:30:07', '2024-12-14 12:01:27'),
+(2, '1734175913.png', 'lesson', 'link', '1734175913.png', '1734175913.png', '3', 1, 1, '2024-12-14 11:31:53', '2024-12-14 11:31:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifications`
 --
 
 CREATE TABLE `notifications` (
@@ -5840,23 +5977,40 @@ CREATE TABLE `notifications` (
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `orders`
+-- Table structure for table `orders`
 --
--- Error reading structure for table uniford.orders: #1932 - Table &#039;uniford.orders&#039; doesn&#039;t exist in engine
--- Error reading data for table uniford.orders: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `uniford`.`orders`&#039; at line 1
+
+CREATE TABLE `orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` varchar(191) DEFAULT NULL,
+  `datetimestr` varchar(191) DEFAULT NULL,
+  `status` varchar(191) DEFAULT NULL,
+  `total` varchar(191) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `order_items`
+-- Table structure for table `order_items`
 --
--- Error reading structure for table uniford.order_items: #1932 - Table &#039;uniford.order_items&#039; doesn&#039;t exist in engine
--- Error reading data for table uniford.order_items: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `uniford`.`order_items`&#039; at line 1
+
+CREATE TABLE `order_items` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` varchar(191) DEFAULT NULL,
+  `user_id` varchar(191) DEFAULT NULL,
+  `course_id` varchar(191) DEFAULT NULL,
+  `price` varchar(191) DEFAULT NULL,
+  `status` varchar(191) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `pages`
+-- Table structure for table `pages`
 --
 
 CREATE TABLE `pages` (
@@ -5870,7 +6024,7 @@ CREATE TABLE `pages` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `pages`
+-- Dumping data for table `pages`
 --
 
 INSERT INTO `pages` (`id`, `title_ar`, `title_en`, `content_ar`, `content_en`, `created_at`, `updated_at`) VALUES
@@ -5879,7 +6033,7 @@ INSERT INTO `pages` (`id`, `title_ar`, `title_en`, `content_ar`, `content_en`, `
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `password_resets`
+-- Table structure for table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -5889,7 +6043,7 @@ CREATE TABLE `password_resets` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `password_resets`
+-- Dumping data for table `password_resets`
 --
 
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
@@ -5898,15 +6052,7 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `password_reset_tokens`
---
--- Error reading structure for table uniford.password_reset_tokens: #1932 - Table &#039;uniford.password_reset_tokens&#039; doesn&#039;t exist in engine
--- Error reading data for table uniford.password_reset_tokens: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `uniford`.`password_reset_tokens`&#039; at line 1
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `permissions`
+-- Table structure for table `permissions`
 --
 
 CREATE TABLE `permissions` (
@@ -5922,7 +6068,7 @@ CREATE TABLE `permissions` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `permissions`
+-- Dumping data for table `permissions`
 --
 
 INSERT INTO `permissions` (`id`, `name_ar`, `name_en`, `name_fr`, `can`, `middleware`, `group`, `created_at`, `updated_at`) VALUES
@@ -6041,15 +6187,135 @@ INSERT INTO `permissions` (`id`, `name_ar`, `name_en`, `name_fr`, `can`, `middle
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `personal_access_tokens`
+-- Table structure for table `question_courses`
 --
--- Error reading structure for table uniford.personal_access_tokens: #1932 - Table &#039;uniford.personal_access_tokens&#039; doesn&#039;t exist in engine
--- Error reading data for table uniford.personal_access_tokens: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `uniford`.`personal_access_tokens`&#039; at line 1
+
+CREATE TABLE `question_courses` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `question` varchar(191) NOT NULL,
+  `option1` varchar(191) NOT NULL,
+  `option2` varchar(255) NOT NULL,
+  `option3` varchar(255) NOT NULL,
+  `option4` varchar(255) DEFAULT NULL,
+  `option5` varchar(255) DEFAULT NULL,
+  `correct_answer` varchar(191) NOT NULL,
+  `quiz_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `question_courses`
+--
+
+INSERT INTO `question_courses` (`id`, `question`, `option1`, `option2`, `option3`, `option4`, `option5`, `correct_answer`, `quiz_id`, `created_at`, `updated_at`) VALUES
+(1, 'q1', 'a1', 'a2', 'a3', NULL, NULL, 'a1', 1, '2024-12-14 12:05:06', '2024-12-14 12:05:12'),
+(2, '1734177936.png', '1734177936.png', '1734177936.png', '1734177936.mp4', NULL, NULL, '1734177936.png', 1, '2024-12-14 12:05:36', '2024-12-14 12:05:36');
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `revenues`
+-- Table structure for table `question_lessons`
+--
+
+CREATE TABLE `question_lessons` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `question` varchar(191) NOT NULL,
+  `option1` varchar(191) NOT NULL,
+  `option2` varchar(255) NOT NULL,
+  `option3` varchar(255) NOT NULL,
+  `option4` varchar(255) DEFAULT NULL,
+  `option5` varchar(255) DEFAULT NULL,
+  `correct_answer` varchar(191) NOT NULL,
+  `lesson_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `question_lessons`
+--
+
+INSERT INTO `question_lessons` (`id`, `question`, `option1`, `option2`, `option3`, `option4`, `option5`, `correct_answer`, `lesson_id`, `created_at`, `updated_at`) VALUES
+(1, 'q1', '1734177303.png', '1734177303.mp4', '1734177303.png', 'a4', NULL, '1734177303.mp3', 1, '2024-12-14 11:55:03', '2024-12-14 11:55:15');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question_seperates`
+--
+
+CREATE TABLE `question_seperates` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `question` varchar(191) NOT NULL,
+  `option1` varchar(191) NOT NULL,
+  `option2` varchar(255) NOT NULL,
+  `option3` varchar(255) NOT NULL,
+  `option4` varchar(255) DEFAULT NULL,
+  `option5` varchar(255) DEFAULT NULL,
+  `correct_answer` varchar(191) NOT NULL,
+  `seperate_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `question_seperates`
+--
+
+INSERT INTO `question_seperates` (`id`, `question`, `option1`, `option2`, `option3`, `option4`, `option5`, `correct_answer`, `seperate_id`, `created_at`, `updated_at`) VALUES
+(1, 'q1', 'a1', 'a2', 'a3', 'a4', NULL, 'a3', 9, '2024-12-14 11:52:04', '2024-12-14 11:52:15'),
+(2, '1734177173.png', '1734177173.png', '1734177174.png', '1734177174.png', NULL, NULL, '1734177173.png', 9, '2024-12-14 11:52:54', '2024-12-14 11:52:54');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quiz_courses`
+--
+
+CREATE TABLE `quiz_courses` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `icon` varchar(191) NOT NULL,
+  `course_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `quiz_courses`
+--
+
+INSERT INTO `quiz_courses` (`id`, `name`, `icon`, `course_id`, `created_at`, `updated_at`) VALUES
+(1, 'quiz for cousre python', '1734177896.png', 1, '2024-12-14 12:04:56', '2024-12-14 12:04:56');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quiz_lessons`
+--
+
+CREATE TABLE `quiz_lessons` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `icon` varchar(191) NOT NULL,
+  `lesson_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `quiz_lessons`
+--
+
+INSERT INTO `quiz_lessons` (`id`, `name`, `icon`, `lesson_id`, `created_at`, `updated_at`) VALUES
+(1, 'quiz for first lesson', '1734177257.png', 1, '2024-12-14 11:54:17', '2024-12-14 11:54:17'),
+(2, 'quiz1', '1734177272.png', 1, '2024-12-14 11:54:32', '2024-12-14 11:54:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `revenues`
 --
 
 CREATE TABLE `revenues` (
@@ -6074,7 +6340,7 @@ CREATE TABLE `revenues` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `revenues`
+-- Dumping data for table `revenues`
 --
 
 INSERT INTO `revenues` (`id`, `branch_id`, `UID`, `LinkedID`, `Type`, `amount`, `Notes`, `Date`, `DateStr`, `Files`, `month`, `year`, `safe_id`, `client_id`, `group_id`, `course_id`, `created_at`, `updated_at`) VALUES
@@ -6326,7 +6592,7 @@ INSERT INTO `revenues` (`id`, `branch_id`, `UID`, `LinkedID`, `Type`, `amount`, 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `roles`
+-- Table structure for table `roles`
 --
 
 CREATE TABLE `roles` (
@@ -6340,7 +6606,7 @@ CREATE TABLE `roles` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `roles`
+-- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`id`, `name_ar`, `name_en`, `name_fr`, `guard`, `created_at`, `updated_at`) VALUES
@@ -6352,7 +6618,7 @@ INSERT INTO `roles` (`id`, `name_ar`, `name_en`, `name_fr`, `guard`, `created_at
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `role_permissions`
+-- Table structure for table `role_permissions`
 --
 
 CREATE TABLE `role_permissions` (
@@ -6364,7 +6630,7 @@ CREATE TABLE `role_permissions` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `role_permissions`
+-- Dumping data for table `role_permissions`
 --
 
 INSERT INTO `role_permissions` (`id`, `roles_id`, `permissions_id`, `created_at`, `updated_at`) VALUES
@@ -6395,7 +6661,28 @@ INSERT INTO `role_permissions` (`id`, `roles_id`, `permissions_id`, `created_at`
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `settings`
+-- Table structure for table `seperate_quizzes`
+--
+
+CREATE TABLE `seperate_quizzes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) NOT NULL,
+  `icon` varchar(191) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `seperate_quizzes`
+--
+
+INSERT INTO `seperate_quizzes` (`id`, `name`, `icon`, `created_at`, `updated_at`) VALUES
+(9, 'quiz seperate', '1734177027.png', '2024-12-14 11:50:27', '2024-12-14 11:50:27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
 --
 
 CREATE TABLE `settings` (
@@ -6409,7 +6696,7 @@ CREATE TABLE `settings` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `settings`
+-- Dumping data for table `settings`
 --
 
 INSERT INTO `settings` (`id`, `key`, `value`, `pageid`, `pagename`, `created_at`, `updated_at`) VALUES
@@ -6587,23 +6874,24 @@ INSERT INTO `settings` (`id`, `key`, `value`, `pageid`, `pagename`, `created_at`
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `transaction_requests`
+-- Table structure for table `transaction_requests`
 --
--- Error reading structure for table uniford.transaction_requests: #1932 - Table &#039;uniford.transaction_requests&#039; doesn&#039;t exist in engine
--- Error reading data for table uniford.transaction_requests: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `uniford`.`transaction_requests`&#039; at line 1
+
+CREATE TABLE `transaction_requests` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` varchar(191) DEFAULT NULL,
+  `status` varchar(191) DEFAULT NULL,
+  `amount` varchar(191) DEFAULT NULL,
+  `payment_type` varchar(191) DEFAULT NULL,
+  `file` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `univerisities`
---
--- Error reading structure for table uniford.univerisities: #1932 - Table &#039;uniford.univerisities&#039; doesn&#039;t exist in engine
--- Error reading data for table uniford.univerisities: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `uniford`.`univerisities`&#039; at line 1
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -6634,11 +6922,11 @@ CREATE TABLE `users` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- إرجاع أو استيراد بيانات الجدول `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `title`, `email`, `email_verified_at`, `password`, `address`, `phone`, `status`, `identity`, `profile_photo`, `role`, `language`, `theme_mode`, `remember_token`, `country`, `coins`, `last_coin_answer`, `bio`, `user_ip`, `google_id`, `created_at`, `updated_at`) VALUES
-(1, 'محمد سلطان', NULL, 'مدير نظام', 'mohamed@uniford.net', '2024-07-29 19:07:25', '$2y$10$vEJltn8F6xlQCR/OEBGLDefmofaKW3XbyceilbshyobfC3bhprbgq', 'mansoura', '01008015133', 'Active', NULL, 'S7j8zkAjFm6NMqOU9aDKiGFLFyZdWeUHSh0sNysv.png', '1', 'ar', 'dark', NULL, NULL, 10, '1729375200', NULL, NULL, NULL, '2021-01-24 19:47:15', '2024-10-20 12:37:01'),
+(1, 'محمد سلطان', NULL, 'مدير نظام', 'mohamed@uniford.net', '2024-07-29 19:07:25', '$2y$10$vEJltn8F6xlQCR/OEBGLDefmofaKW3XbyceilbshyobfC3bhprbgq', 'mansoura', '01008015133', 'Active', NULL, 'S7j8zkAjFm6NMqOU9aDKiGFLFyZdWeUHSh0sNysv.png', '1', 'ar', 'dark', NULL, NULL, 10, '1734127200', NULL, NULL, NULL, '2021-01-24 19:47:15', '2024-12-14 09:29:15'),
 (48, 'ا.علاء عبد الحميد', 'ا.علاء عبد الحميد', NULL, 'Abo.noor2008@gmail.com', '2024-04-17 12:41:12', '$2y$10$m1VK3ZbheaQ.ZqLaTaePIO7Ze31c/uEXV39GxVhcZagkYYxhUEAjC', 'الرياض / السعودية', '050144500', 'Active', NULL, 'voSSWhpjk2PczrIqHHzf1Mdi8HcrOJtrLICiybSp.jpg', '19', 'ar', 'light', 'VwgnTGCwp6FL2YiGYGJ6orYBl5Fs3zQoW0ZVABiRrfSqRHRmglpTJIFk6kFN', NULL, 0, '1723932000', NULL, NULL, NULL, '2023-12-06 23:41:25', '2024-09-08 13:12:05'),
 (50, 'ا.علاء عبد الحميد', NULL, NULL, 'iphonex20173@gmail.com', NULL, '$2y$10$ZBLEOQLHZT07bx..ZQVXWeSYvbQZnPfL4w5Ebpz3DoHQ4jKQQvxiu', NULL, '01029702386', 'Active', NULL, NULL, '3', 'ar', 'light', NULL, NULL, 0, NULL, NULL, NULL, NULL, '2024-01-04 16:09:02', '2024-01-04 16:09:02'),
 (75, 'Mohamed Sultan', NULL, NULL, 'mrmohamedsultan766@gmail.com', '2024-04-06 10:19:39', '$2y$10$qMZ466.pgr650wq7C9A3vOoNR5ZFMzA8cJBocjVDXi6QCpEHLv/kC', NULL, '321654', 'Active', NULL, NULL, '3', 'ar', 'light', NULL, NULL, 0, '1720821600', NULL, '41.235.181.149', NULL, '2024-04-05 23:59:06', '2024-07-13 08:35:38'),
@@ -6897,14 +7185,30 @@ INSERT INTO `users` (`id`, `name`, `username`, `title`, `email`, `email_verified
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `user_transactions`
+-- Table structure for table `user_transactions`
 --
--- Error reading structure for table uniford.user_transactions: #1932 - Table &#039;uniford.user_transactions&#039; doesn&#039;t exist in engine
--- Error reading data for table uniford.user_transactions: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `uniford`.`user_transactions`&#039; at line 1
+
+CREATE TABLE `user_transactions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `in` varchar(191) DEFAULT NULL,
+  `out` varchar(191) DEFAULT NULL,
+  `payment_method` varchar(191) DEFAULT NULL,
+  `datetimestr` varchar(191) DEFAULT NULL,
+  `user_id` varchar(191) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `chapters`
+--
+ALTER TABLE `chapters`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `chapters_course_id_foreign` (`course_id`);
 
 --
 -- Indexes for table `contact_messages`
@@ -6967,10 +7271,44 @@ ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `history_quizes`
+--
+ALTER TABLE `history_quizes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `new_courses`
+--
+ALTER TABLE `new_courses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `new_instructors`
+--
+ALTER TABLE `new_instructors`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `new_instructors_new_courses`
+--
+ALTER TABLE `new_instructors_new_courses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `new_instructors_new_courses_new_courses_id_foreign` (`new_courses_id`),
+  ADD KEY `new_instructors_new_courses_new_instructors_id_foreign` (`new_instructors_id`);
+
+--
+-- Indexes for table `new__lessons`
+--
+ALTER TABLE `new__lessons`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `new__lessons_chapter_id_foreign` (`chapter_id`),
+  ADD KEY `new__lessons_course_id_foreign` (`course_id`);
 
 --
 -- Indexes for table `notifications`
@@ -6978,6 +7316,18 @@ ALTER TABLE `migrations`
 ALTER TABLE `notifications`
   ADD PRIMARY KEY (`id`),
   ADD KEY `notifications_notifiable_type_notifiable_id_index` (`notifiable_type`,`notifiable_id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `pages`
@@ -6998,6 +7348,41 @@ ALTER TABLE `permissions`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `question_courses`
+--
+ALTER TABLE `question_courses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `question_courses_quiz_id_foreign` (`quiz_id`);
+
+--
+-- Indexes for table `question_lessons`
+--
+ALTER TABLE `question_lessons`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `question_lessons_lesson_id_foreign` (`lesson_id`);
+
+--
+-- Indexes for table `question_seperates`
+--
+ALTER TABLE `question_seperates`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `question_seperates_seperate_id_foreign` (`seperate_id`);
+
+--
+-- Indexes for table `quiz_courses`
+--
+ALTER TABLE `quiz_courses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `quiz_courses_course_id_foreign` (`course_id`);
+
+--
+-- Indexes for table `quiz_lessons`
+--
+ALTER TABLE `quiz_lessons`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `quiz_lessons_lesson_id_foreign` (`lesson_id`);
+
+--
 -- Indexes for table `revenues`
 --
 ALTER TABLE `revenues`
@@ -7016,9 +7401,21 @@ ALTER TABLE `role_permissions`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `seperate_quizzes`
+--
+ALTER TABLE `seperate_quizzes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `settings`
 --
 ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `transaction_requests`
+--
+ALTER TABLE `transaction_requests`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -7030,8 +7427,20 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_username_unique` (`username`);
 
 --
+-- Indexes for table `user_transactions`
+--
+ALTER TABLE `user_transactions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `chapters`
+--
+ALTER TABLE `chapters`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `contact_messages`
@@ -7094,10 +7503,52 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `history_quizes`
+--
+ALTER TABLE `history_quizes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+
+--
+-- AUTO_INCREMENT for table `new_courses`
+--
+ALTER TABLE `new_courses`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `new_instructors`
+--
+ALTER TABLE `new_instructors`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `new_instructors_new_courses`
+--
+ALTER TABLE `new_instructors_new_courses`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `new__lessons`
+--
+ALTER TABLE `new__lessons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -7110,6 +7561,36 @@ ALTER TABLE `pages`
 --
 ALTER TABLE `permissions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
+
+--
+-- AUTO_INCREMENT for table `question_courses`
+--
+ALTER TABLE `question_courses`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `question_lessons`
+--
+ALTER TABLE `question_lessons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `question_seperates`
+--
+ALTER TABLE `question_seperates`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `quiz_courses`
+--
+ALTER TABLE `quiz_courses`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `quiz_lessons`
+--
+ALTER TABLE `quiz_lessons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `revenues`
@@ -7130,16 +7611,88 @@ ALTER TABLE `role_permissions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=458;
 
 --
+-- AUTO_INCREMENT for table `seperate_quizzes`
+--
+ALTER TABLE `seperate_quizzes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
 
 --
+-- AUTO_INCREMENT for table `transaction_requests`
+--
+ALTER TABLE `transaction_requests`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2097;
+
+--
+-- AUTO_INCREMENT for table `user_transactions`
+--
+ALTER TABLE `user_transactions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `chapters`
+--
+ALTER TABLE `chapters`
+  ADD CONSTRAINT `chapters_course_id_foreign` FOREIGN KEY (`course_id`) REFERENCES `new_courses` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `new_instructors_new_courses`
+--
+ALTER TABLE `new_instructors_new_courses`
+  ADD CONSTRAINT `new_instructors_new_courses_new_courses_id_foreign` FOREIGN KEY (`new_courses_id`) REFERENCES `new_instructors` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `new_instructors_new_courses_new_instructors_id_foreign` FOREIGN KEY (`new_instructors_id`) REFERENCES `new_instructors` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `new__lessons`
+--
+ALTER TABLE `new__lessons`
+  ADD CONSTRAINT `new__lessons_chapter_id_foreign` FOREIGN KEY (`chapter_id`) REFERENCES `chapters` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `new__lessons_course_id_foreign` FOREIGN KEY (`course_id`) REFERENCES `new_courses` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `question_courses`
+--
+ALTER TABLE `question_courses`
+  ADD CONSTRAINT `question_courses_quiz_id_foreign` FOREIGN KEY (`quiz_id`) REFERENCES `quiz_courses` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `question_lessons`
+--
+ALTER TABLE `question_lessons`
+  ADD CONSTRAINT `question_lessons_lesson_id_foreign` FOREIGN KEY (`lesson_id`) REFERENCES `quiz_lessons` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `question_seperates`
+--
+ALTER TABLE `question_seperates`
+  ADD CONSTRAINT `question_seperates_seperate_id_foreign` FOREIGN KEY (`seperate_id`) REFERENCES `seperate_quizzes` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `quiz_courses`
+--
+ALTER TABLE `quiz_courses`
+  ADD CONSTRAINT `quiz_courses_course_id_foreign` FOREIGN KEY (`course_id`) REFERENCES `new_courses` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `quiz_lessons`
+--
+ALTER TABLE `quiz_lessons`
+  ADD CONSTRAINT `quiz_lessons_lesson_id_foreign` FOREIGN KEY (`lesson_id`) REFERENCES `new__lessons` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
