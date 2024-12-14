@@ -19,13 +19,12 @@ class QuizHistoryController extends Controller
 
         return view('AdminPanel.quizhistory.index',[
             'active' => 'new courses',
-            'title' => 'الدورات التدريبية',
-
+            'title' => ' quiz history',
             'quizes' => $quizes,
             'breadcrumbs' => [
                 [
                     'url' => '',
-                    'text' => 'الدورات التدريبية'
+                    'text' => ' '
                 ]
             ]
         ]);

@@ -72,6 +72,14 @@
     <!-- Bordered table end -->
 
 @foreach($chapters as $chapter)
+@if ($errors->hasBag('editchapter' . $chapter->id) && $errors->getBag('editchapter' . $chapter->id)->any())
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = new bootstrap.Modal(document.getElementById('editchapter{{ $chapter->id }}'));
+        modal.show();
+    });
+</script>
+@endif
 
     <div class="modal fade text-md-start" id="editchapter{{$chapter->id}}" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
@@ -92,6 +100,9 @@
                         <div class="col-12 col-md-8">
                             <label class="form-label" for="number">{{trans('رقم الشابتر')}}</label>
                             {{Form::text('number',$chapter->number,['id'=>'number', 'class'=>'form-control','required'])}}
+                            @if ($errors->hasBag('editchapter' . $chapter->id) && $errors->getBag('editchapter' . $chapter->id)->has('number'))
+                            <span class="text-danger">{{ $errors->getBag('editchapter' . $chapter->id)->first('number') }}</span>
+                          @endif
                         </div>
                         <!-- @if ($active != 'curriculums')
                             <div class="col-12 col-md-4">
@@ -154,6 +165,14 @@
         {{trans('common.CreateNew')}}
     </a>
 
+        @if ($errors->createcourse->any())
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = new bootstrap.Modal(document.getElementById('createcourse'));
+            modal.show();
+        });
+    </script>
+    @endif
     <div class="modal fade text-md-start" id="createcourse" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
             <div class="modal-content">
@@ -170,11 +189,17 @@
                         <div class="col-12 col-md-8">
                             <label class="form-label" for="name">{{trans('common.name')}}</label>
                             {{Form::text('name','',['id'=>'name', 'class'=>'form-control','required'])}}
+                            @if ($errors->createcourse->has('name'))
+                                <span class="text-danger">{{ $errors->createcourse->first('name') }}</span>
+                            @endif
                         </div>
 
                         <div class="col-12 col-md-8">
                             <label class="form-label" for="number">{{trans('رقم الشابتر')}}</label>
                             {{Form::text('number','',['id'=>'number', 'class'=>'form-control','required'])}}
+                            @if ($errors->createcourse->has('number'))
+                                <span class="text-danger">{{ $errors->createcourse->first('number') }}</span>
+                            @endif
                         </div>
                         <!-- @if ($active != 'curriculums')
                             <div class="col-12 col-md-4">
@@ -205,6 +230,9 @@
                                 <div class="file-loading">
                                     <input class="files" name="icon" type="file">
                                 </div>
+                                @if ($errors->createcourse->has('icon'))
+                                <span class="text-danger">{{ $errors->createcourse->first('icon') }}</span>
+                            @endif
                             </div>
                         </div>
                         <div class="col-12 text-center mt-2 pt-50">

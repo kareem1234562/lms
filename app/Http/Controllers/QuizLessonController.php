@@ -22,7 +22,7 @@ class QuizLessonController extends Controller
 
         return view('AdminPanel.quizlesson.index',[
             'active' => 'new courses',
-            'title' => 'الدورات التدريبية',
+            'title' => ' quiz lesson',
             'course_id'=>$course_id,
             'quizes' => $quizes,
             'breadcrumbs' => [

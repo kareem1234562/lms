@@ -7,6 +7,7 @@ use App\Models\Chapters;
 use App\Models\New_Lessons;
 use App\Models\NewCourses;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Response;
 
 class NewLessonsController extends Controller
@@ -28,7 +29,7 @@ class NewLessonsController extends Controller
         $lessons=$course->Lessons_course()->paginate(10);
         return view('AdminPanel.newlessons.index',[
             'active' => 'new courses',
-            'title' => 'الدورات التدريبية',
+            'title' => ' lessons',
             'chapters'=>$chapters,
             'lessons' => $lessons,
             'course_id'=>$course_id,
@@ -55,6 +56,19 @@ class NewLessonsController extends Controller
      */
     public function store(Request $request,$id)
     {
+        $validator = Validator::make($request->all(), [
+            'number' => 'required|unique:new__lessons',
+            'name' => 'required',
+            'video' => 'required',
+            'icon' => 'required',
+            'file' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator, 'createcourse')
+                ->withInput();
+        }
         $data=$request->except('_token');
         $data['course_id']=$id;
 
@@ -64,10 +78,7 @@ class NewLessonsController extends Controller
             $data['chapter_id']=null;
         }else{
             $data['chapter_id']=$chapter_id;
-
         }
-
-
         $data['video']=upload_file('lessons/video', $request->video);
         $data['icon']=upload_file('lessons/icons', $request->icon);
         $data['file']=upload_file('lessons/files', $request->file);
@@ -103,10 +114,19 @@ class NewLessonsController extends Controller
     public function update(Request $request, $id)
     {
         $lesson = New_Lessons::find($id);
+        $validator = Validator::make($request->all(), [
+            'number' => 'required|unique:new__lessons,number,' . $lesson->id,
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator, 'editchapter'.$lesson->id)
+                ->withInput();
+        }
         $data = $request->except(['_token']); // Exclude Photo if it's not being updated
         $data['chapter_id']=$request->chapter_id;
         if ($request->hasFile('icon')) {
-            $data['icon'] = upload_image_without_resize('lessons/icons/', $request->icon);
+            $data['icon'] = upload_file('lessons/icons/', $request->icon);
         } else {
             $data['icon'] = $lesson->icon; // Keep the old image without re-uploading
         }

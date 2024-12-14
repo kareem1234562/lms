@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Chapters;
 use App\Models\NewCourses;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Response;
 class ChaptersController extends Controller
 {
@@ -18,13 +19,13 @@ class ChaptersController extends Controller
         $course_id=NewCourses::find($id)->id;
         return view('AdminPanel.chapters.index',[
             'active' => 'new courses',
-            'title' => 'الدورات التدريبية',
+            'title' => ' chapters',
             'course_id'=>$course_id,
             'chapters' => $chapters,
             'breadcrumbs' => [
                 [
                     'url' => '',
-                    'text' => 'الدورات التدريبية'
+                    'text' => ' '
                 ]
             ]
         ]);
@@ -44,9 +45,19 @@ class ChaptersController extends Controller
      */
     public function store(Request $request,$id)
     {
+        $validator = Validator::make($request->all(), [
+            'number' => 'required|unique:chapters',
+            'name' => 'required',
+            'icon' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator, 'createcourse')
+                ->withInput();
+        }
         $data=$request->except(['_token']);
         $data['course_id']=$id;
-        $data['icon']=upload_image_without_resize('chapters', $request->icon);
+        $data['icon']=upload_file('chapters', $request->icon);
         $chapters=Chapters::create($data);
 
         if($chapters){
@@ -80,6 +91,15 @@ return redirect()->back()->with('success', 'تم اضافة الدرس بنجا�
     {
         $data=$request->except('_token');
         $chapter = Chapters::find($id);
+        $validator = Validator::make($request->all(), [
+            'number' => 'required|unique:chapters,number,' . $chapter->id,
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator, 'editchapter'.$chapter->id)
+                ->withInput();
+        }
         if($request->hasFile('icon')){
             $data['icon']=upload_image_without_resize('chapters', $request->icon);
         }else{

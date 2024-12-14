@@ -55,7 +55,7 @@
                                         <a href="{{route('admin.courses2.lessons',$course->id)}}" class="btn btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="{{trans('learning.lessons')}}">
                                             <i data-feather='list'></i>
                                         </a>
-                                        <a href="javascript:;" data-bs-target="#editcourse{{$course->id}}" data-bs-toggle="modal" class="btn btn-icon btn-info" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="{{trans('common.edit')}}">
+                                        <a href="javascript:;" data-bs-target="#editcourse_{{$course->id}}" data-bs-toggle="modal" class="btn btn-icon btn-info" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="{{trans('common.edit')}}">
                                             <i data-feather='edit'></i>
                                         </a>
 
@@ -86,8 +86,15 @@
     <!-- Bordered table end -->
 
 @foreach($courses as $course)
-
-    <div class="modal fade text-md-start" id="editcourse{{$course->id}}" tabindex="-1" aria-hidden="true">
+@if ($errors->hasBag('editcourse_' . $course->id) && $errors->getBag('editcourse_' . $course->id)->any())
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = new bootstrap.Modal(document.getElementById('editcourse_{{ $course->id }}'));
+        modal.show();
+    });
+</script>
+@endif
+    <div class="modal fade text-md-start" id="editcourse_{{$course->id}}" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
             <div class="modal-content">
                 <div class="modal-header bg-transparent">
@@ -101,7 +108,9 @@
                     <div class="col-12 col-md-8">
                             <label class="form-label" for="name">{{trans('common.name')}}</label>
                             {{Form::text('name',$course->name,['id'=>'name', 'class'=>'form-control','required'])}}
-
+                            @if ($errors->hasBag('editcourse_' . $course->id) && $errors->getBag('editcourse_' . $course->id)->has('name'))
+                            <span class="text-danger">{{ $errors->getBag('editcourse_' . $course->id)->first('name') }}</span>
+                        @endif
                         </div>
                         <!-- @if ($active != 'curriculums')
                             <div class="col-12 col-md-4">
@@ -113,14 +122,23 @@
                         <div class="col-12 col-md-3">
                             <label class="form-label" for="price">{{trans('common.price')}}</label>
                             {{Form::number('price',$course->price,['id'=>'price', 'class'=>'form-control','required'])}}
+                            @if ($errors->hasBag('editcourse_' . $course->id) && $errors->getBag('editcourse_' . $course->id)->has('price'))
+                            <span class="text-danger">{{ $errors->getBag('editcourse_' . $course->id)->first('price') }}</span>
+                        @endif
                         </div>
                         <div class="col-12 col-md-3">
                             <label class="form-label" for="Discounted_Price">{{trans('بعد الخصم')}}</label>
                             {{Form::number('Discounted_Price',$course->Discounted_Price,['id'=>'Discounted_Price', 'class'=>'form-control'])}}
+                            @if ($errors->hasBag('editcourse_' . $course->id) && $errors->getBag('editcourse_' . $course->id)->has('Discounted_Price'))
+                            <span class="text-danger">{{ $errors->getBag('editcourse_' . $course->id)->first('Discounted_Price') }}</span>
+                        @endif
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="form-label" for="Instructors">{{trans('learning.instructors')}}</label>
                             {{Form::select('Instructors[]',instructorsList(),json_decode($course->Instructors),['id'=>'Instructors', 'class'=>'selectpicker','multiple'=>'true'])}}
+                            @if ($errors->hasBag('editcourse_' . $course->id) && $errors->getBag('editcourse_' . $course->id)->has('Instructors'))
+                            <span class="text-danger">{{ $errors->getBag('editcourse_' . $course->id)->first('Instructors') }}</span>
+                        @endif
                         </div>
                         <!-- <div class="col-12"></div>
                         <div class="col-12 col-md-12">
@@ -149,6 +167,9 @@
                                 <div class="file-loading">
                                     <input class="files" name="photo" type="file">
                                 </div>
+                                @if ($errors->hasBag('editcourse_' . $course->id) && $errors->getBag('editcourse_' . $course->id)->has('photo'))
+                            <span class="text-danger">{{ $errors->getBag('editcourse_' . $course->id)->first('photo') }}</span>
+                        @endif
                             </div>
                         </div>
                         <div class="row d-flex justify-content-center">
@@ -160,6 +181,9 @@
                                 <div class="file-loading">
                                     <input class="files" name="Explanatory_Video" type="file">
                                 </div>
+                                @if ($errors->hasBag('editcourse_' . $course->id) && $errors->getBag('editcourse_' . $course->id)->has('Explanatory_Video'))
+                            <span class="text-danger">{{ $errors->getBag('editcourse_' . $course->id)->first('Explanatory_Video') }}</span>
+                        @endif
                             </div>
                         </div>
 
@@ -196,6 +220,17 @@
         {{trans('common.CreateNew')}}
     </a>
 
+
+    @if ($errors->createcourse->any())
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = new bootstrap.Modal(document.getElementById('createcourse'));
+        modal.show();
+    });
+</script>
+@endif
+
+
     <div class="modal fade text-md-start" id="createcourse" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
             <div class="modal-content">
@@ -212,7 +247,9 @@
                         <div class="col-12 col-md-8">
                             <label class="form-label" for="name">{{trans('common.name')}}</label>
                             {{Form::text('name','',['id'=>'name', 'class'=>'form-control','required'])}}
-
+                                                    @if ($errors->createcourse->has('name'))
+                                <span class="text-danger">{{ $errors->createcourse->first('name') }}</span>
+                            @endif
                         </div>
                         <!-- @if ($active != 'curriculums')
                             <div class="col-12 col-md-4">
@@ -224,15 +261,26 @@
                         <div class="col-12 col-md-3">
                             <label class="form-label" for="price">{{trans('common.price')}}</label>
                             {{Form::number('price',0,['id'=>'price', 'class'=>'form-control','required'])}}
+                            @if ($errors->createcourse->has('price'))
+                                <span class="text-danger">{{$errors->createcourse->first('price')}}</span>
+                            @endif
                         </div>
+
                         <div class="col-12 col-md-3">
                             <label class="form-label" for="Discounted_Price">{{trans('بعد الخصم')}}</label>
                             {{Form::number('Discounted_Price',0,['id'=>'Discounted_Price', 'class'=>'form-control'])}}
+                                        @if ($errors->createcourse->has('Discounted_Price'))
+                                <span class="text-danger">{{$errors->createcourse->first('Discounted_Price')}}</span>
+                            @endif
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="form-label" for="Instructors">{{trans('learning.instructors')}}</label>
                             {{Form::select('Instructors[]',instructorsList(),'',['id'=>'Instructors', 'class'=>'selectpicker','multiple'])}}
+                            @if ($errors->createcourse->has('Instructors'))
+                                <span class="text-danger">{{$errors->createcourse->first('Instructors')}}</span>
+                            @endif
                         </div>
+
                         <!-- <div class="col-12"></div>
                         <div class="col-12 col-md-12">
                             <label class="form-label" for="details_ar">{{trans('common.des_ar')}}</label>
@@ -255,16 +303,22 @@
                             <div class="col-md-12">
                                 <label class="form-label" for="photo">صورة العرض على الموقع</label>
                                 <div class="file-loading">
-                                    <input class="files" name="photo" type="file">
+                                    <input class="files" name="photo" type="file" value="{{ old('photo') }}">
                                 </div>
+                                @if ($errors->createcourse->has('photo'))
+                                <span class="text-danger">{{$errors->createcourse->first('photo')}}</span>
+                            @endif
                             </div>
                         </div>
                         <div class="row d-flex justify-content-center">
                             <div class="col-md-12">
                                 <label class="form-label" for="Explanatory_Video">فيديو العرض على الموقع</label>
                                 <div class="file-loading">
-                                    <input class="files" name="Explanatory_Video" type="file">
+                                    <input class="files" name="Explanatory_Video" type="file" value="{{old('Explanatory_Video')}}">
                                 </div>
+                                @if ($errors->createcourse->has('Explanatory_Video'))
+                                <span class="text-danger">{{$errors->createcourse->first('Explanatory_Video')}}</span>
+                            @endif
                             </div>
                         </div>
 
@@ -279,4 +333,6 @@
             </div>
         </div>
     </div>
+
+
 @stop

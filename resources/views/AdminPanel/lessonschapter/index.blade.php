@@ -35,9 +35,7 @@
 
                                     <td class="text-center">
 
-                                    <a href="{{route('admin.courses.lessons',$lesson->id)}}" class="btn btn-icon btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="{{trans('learning.lessons')}}">
-                                            <i data-feather='list'></i>
-                                        </a>
+
 
 
                                         <a href="javascript:;" data-bs-target="#editchapter{{$lesson->id}}" data-bs-toggle="modal" class="btn btn-icon btn-info" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="{{trans('common.edit')}}">
@@ -72,7 +70,14 @@
     <!-- Bordered table end -->
 
 @foreach($lessons as $lesson)
-
+@if ($errors->hasBag('editchapter' . $lesson->id) && $errors->getBag('editchapter' . $lesson->id)->any())
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = new bootstrap.Modal(document.getElementById('editchapter{{ $lesson->id }}'));
+        modal.show();
+    });
+</script>
+@endif
     <div class="modal fade text-md-start" id="editchapter{{$lesson->id}}" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
             <div class="modal-content">
@@ -92,6 +97,9 @@
                 <div class="col-12 col-md-8">
                     <label class="form-label" for="number">{{trans('رقم الحصه')}}</label>
                     {{Form::text('number',$lesson->number,['id'=>'number', 'class'=>'form-control','required'])}}
+                    @if ($errors->hasBag('editchapter' . $lesson->id) && $errors->getBag('editchapter' . $lesson->id)->has('number'))
+                            <span class="text-danger">{{ $errors->getBag('editchapter' . $lesson->id)->first('number') }}</span>
+                        @endif
                 </div>
 
 
@@ -135,7 +143,9 @@
                     <div class="col-md-12">
                         <label class="form-label" for="video">فيديو العرض على الموقع</label>
                         <div>
-                        <img src="{{asset('uploads/lessons/video/'.$lesson->video)}}" alt="no" width="100" style="border-radius: 100%;">
+                        <video src="{{asset('uploads/lessons/video/'.$lesson->video)}}" width="100" alt="no vid" controls>
+
+                        </video>
                         </div>
                         <div class="file-loading">
                             <input class="files" name="video" type="file">
@@ -183,7 +193,14 @@
     <a href="javascript:;" data-bs-target="#createcourse" data-bs-toggle="modal" class="btn btn-primary btn-sm">
         {{trans('common.CreateNew')}}
     </a>
-
+    @if ($errors->createcourse->any())
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = new bootstrap.Modal(document.getElementById('createcourse'));
+        modal.show();
+    });
+</script>
+@endif
     <div class="modal fade text-md-start" id="createcourse" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
             <div class="modal-content">
@@ -201,11 +218,17 @@
                 <div class="col-12 col-md-8">
                     <label class="form-label" for="name">{{trans('common.name')}}</label>
                     {{Form::text('name','',['id'=>'name', 'class'=>'form-control','required'])}}
+                    @if ($errors->createcourse->has('number'))
+                                <span class="text-danger">{{ $errors->createcourse->first('number') }}</span>
+                            @endif
                 </div>
 
                 <div class="col-12 col-md-8">
                     <label class="form-label" for="number">{{trans('رقم الحصه')}}</label>
                     {{Form::text('number','',['id'=>'number', 'class'=>'form-control','required'])}}
+                    @if ($errors->createcourse->has('number'))
+                                <span class="text-danger">{{ $errors->createcourse->first('number') }}</span>
+                            @endif
                 </div>
 
 
@@ -215,10 +238,8 @@
                 <div class="col-12 col-md-8">
                     <label class="form-label" for="stream_link">{{trans('streamlink')}}</label>
                     {{Form::text('stream_link','',['id'=>'stream_link', 'class'=>'form-control','required'])}}
+
                 </div>
-
-
-
                 <!-- <div class="col-12"></div>
                         <div class="col-12 col-md-12">
                             <label class="form-label" for="details_ar">{{trans('common.des_ar')}}</label>
@@ -240,6 +261,9 @@
                         <div class="file-loading">
                             <input class="files" name="icon" type="file">
                         </div>
+                        @if ($errors->createcourse->has('icon'))
+                                <span class="text-danger">{{ $errors->createcourse->first('icon') }}</span>
+                            @endif
                     </div>
                 </div>
 
@@ -249,6 +273,9 @@
                         <div class="file-loading">
                             <input class="files" name="video" type="file">
                         </div>
+                        @if ($errors->createcourse->has('video'))
+                            <span class="text-danger">{{ $errors->createcourse->first('video') }}</span>
+                        @endif
                     </div>
                 </div>
 
@@ -258,6 +285,9 @@
                         <div class="file-loading">
                             <input class="files" name="file" type="file">
                         </div>
+                        @if ($errors->createcourse->has('file'))
+                            <span class="text-danger">{{ $errors->createcourse->first('file') }}</span>
+                        @endif
                     </div>
                 </div>
 

@@ -71,7 +71,14 @@
 <!-- Bordered table end -->
 
 @foreach($lessons as $lesson)
-
+@if ($errors->hasBag('editchapter' . $lesson->id) && $errors->getBag('editchapter' . $lesson->id)->any())
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = new bootstrap.Modal(document.getElementById('editchapter{{ $lesson->id }}'));
+        modal.show();
+    });
+</script>
+@endif
 <div class="modal fade text-md-start" id="editchapter{{$lesson->id}}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
         <div class="modal-content">
@@ -86,13 +93,16 @@
                 <div class="col-12 col-md-8">
                     <label class="form-label" for="name">{{trans('common.name')}}</label>
                     {{Form::text('name',$lesson->name,['id'=>'name', 'class'=>'form-control','required'])}}
+
                 </div>
 
                 <div class="col-12 col-md-8">
                     <label class="form-label" for="number">{{trans('رقم الحصه')}}</label>
-                    {{Form::text('number',$lesson->number,['id'=>'number', 'class'=>'form-control','required'])}}
+                    {{Form::number('number',$lesson->number,['id'=>'number', 'class'=>'form-control','required'])}}
+                    @if ($errors->hasBag('editchapter' . $lesson->id) && $errors->getBag('editchapter' . $lesson->id)->has('number'))
+                            <span class="text-danger">{{ $errors->getBag('editchapter' . $lesson->id)->first('number') }}</span>
+                        @endif
                 </div>
-
 
 
         <div class="col-12 col-md-6">
@@ -129,7 +139,7 @@
                         <img src="{{asset('uploads/lessons/icons/'.$lesson->icon)}}" alt="no" width="100" style="border-radius: 100%;">
                         </div>
                         <div class="file-loading">
-                            <input class="files" name="icon" type="file">
+                            <input class="files" name="icon" type="file" >
                         </div>
                     </div>
                 </div>
@@ -141,7 +151,7 @@
                         <img src="{{asset('uploads/lessons/video/'.$lesson->icon)}}" alt="no" width="100" style="border-radius: 100%;">
                         </div>
                         <div class="file-loading">
-                            <input class="files" name="video" type="file">
+                            <input class="files" name="video" type="file" >
                         </div>
                     </div>
                 </div>
@@ -153,7 +163,7 @@
                         <img src="{{asset('uploads/lessons/files/'.$lesson->icon)}}" alt="no" width="100" style="border-radius: 100%;">
                         </div>
                         <div class="file-loading">
-                            <input class="files" name="file" type="file">
+                            <input class="files" name="file" type="file" >
                         </div>
                     </div>
                 </div>
@@ -186,6 +196,15 @@
     {{trans('common.CreateNew')}}
 </a>
 
+@if ($errors->createcourse->any())
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = new bootstrap.Modal(document.getElementById('createcourse'));
+        modal.show();
+    });
+</script>
+@endif
+
 <div class="modal fade text-md-start" id="createcourse" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
         <div class="modal-content">
@@ -207,6 +226,9 @@
                 <div class="col-12 col-md-8">
                     <label class="form-label" for="number">{{trans('رقم الحصه')}}</label>
                     {{Form::text('number','',['id'=>'number', 'class'=>'form-control','required'])}}
+                    @if ($errors->createcourse->has('number'))
+                                <span class="text-danger">{{ $errors->createcourse->first('number') }}</span>
+                            @endif
                 </div>
 
 
@@ -248,7 +270,7 @@
                     <div class="col-md-12">
                         <label class="form-label" for="icon">صورة العرض على الموقع</label>
                         <div class="file-loading">
-                            <input class="files" name="icon" type="file">
+                            <input class="files" name="icon" type="file" required>
                         </div>
                     </div>
                 </div>
@@ -257,7 +279,7 @@
                     <div class="col-md-12">
                         <label class="form-label" for="video">فيديو العرض على الموقع</label>
                         <div class="file-loading">
-                            <input class="files" name="video" type="file">
+                            <input class="files" name="video" type="file" required>
                         </div>
                     </div>
                 </div>
@@ -266,7 +288,7 @@
                     <div class="col-md-12">
                         <label class="form-label" for="file">الملف العرض على الموقع</label>
                         <div class="file-loading">
-                            <input class="files" name="file" type="file">
+                            <input class="files" name="file" type="file" required>
                         </div>
                     </div>
                 </div>

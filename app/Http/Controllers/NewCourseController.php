@@ -11,6 +11,7 @@ use App\Models\QuizCourse;
 use App\Models\QuizLesson;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Response;
 
 use function Laravel\Prompts\table;
@@ -30,7 +31,7 @@ class NewCourseController extends Controller
             'breadcrumbs' => [
                 [
                     'url' => '',
-                    'text' => 'الدورات التدريبية'
+                    'text' => ''
                 ]
             ]
         ]);
@@ -72,14 +73,30 @@ class NewCourseController extends Controller
      */
     public function store(Request $request)
     {
+
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|Unique:new_courses|min:3|max:30',
+            'Instructors' => 'required|array|min:1',
+            'Explanatory_Video'=>'required|mimes:mp4,mov,ogg,qt',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator, 'createcourse')
+                ->withInput();
+        }
         $data = $request->except(['_token']);
 
         // Convert instructors to JSON and add to data array
         $data['Instructors'] = json_encode($request->Instructors);
 
         // Handle file uploads
-        $data['photo'] = upload_image_without_resize('courses', $request->photo);
+        $data['photo'] = upload_file('courses', $request->photo);
         $data['Explanatory_Video'] = upload_file('courses', $request->Explanatory_Video);
+
+
 
         // Create the course
         $course = NewCourses::create($data);
@@ -95,8 +112,6 @@ class NewCourseController extends Controller
                     'new_instructors_id' => $instructorId,
                 ]);
             }
-
-
 
             return redirect()->back()->with('success', trans('common.successMessageText'));
         } else {
@@ -130,13 +145,24 @@ class NewCourseController extends Controller
     {
         $course = NewCourses::find($id);
 
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:new_courses,name,' . $course->id,
+            'Instructors' => 'required|array|min:1',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator, 'editcourse_'.$course->id)
+                ->withInput();
+        }
+
 // Exclude `_token` and `Discounted_Price` from request data
 $data = $request->except(['_token', 'Discounted_Price']);
 $data['Instructors'] = json_encode($request->Instructors);
 
 // Handle `photo` upload
 if ($request->hasFile('photo')) {
-    $data['photo'] = upload_image_without_resize('courses/', $request->photo);
+    $data['photo'] = upload_file('courses/', $request->photo);
 } else {
     $data['photo'] = $course->photo; // Keep the old photo
 }

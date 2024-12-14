@@ -28,7 +28,7 @@
                                         <img src="{{asset('uploads/instructors/'.$instructor->Photo)}}" alt="" width="100">
                                     </td>
                                     <td class="text-center">
-                                        <a href="javascript:;" data-bs-target="#editInstructor{{$instructor->id}}" data-bs-toggle="modal" class="btn btn-icon btn-info" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="{{trans('common.edit')}}">
+                                        <a href="javascript:;" data-bs-target="#editcourse_{{$instructor->id}}" data-bs-toggle="modal" class="btn btn-icon btn-info" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="{{trans('common.edit')}}">
                                             <i data-feather='edit'></i>
                                         </a>
                                         <?php $delete = route('admin.courses.instructors.delete',['id'=>$instructor->id]); ?>
@@ -57,8 +57,15 @@
     <!-- Bordered table end -->
 
 @foreach($instructors as $instructor)
-
-    <div class="modal fade text-md-start" id="editInstructor{{$instructor->id}}" tabindex="-1" aria-hidden="true">
+@if ($errors->hasBag('editcourse_' . $instructor->id) && $errors->getBag('editcourse_' . $instructor->id)->any())
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = new bootstrap.Modal(document.getElementById('editcourse_{{ $instructor->id }}'));
+        modal.show();
+    });
+</script>
+@endif
+    <div class="modal fade text-md-start" id="editcourse_{{$instructor->id}}" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
             <div class="modal-content">
                 <div class="modal-header bg-transparent">
@@ -72,24 +79,24 @@
                     <div class="col-12 col-md-3">
                             <label class="form-label" for="name">{{trans('common.name_ar')}}</label>
                             {{Form::text('name',$instructor->name,['id'=>'name', 'class'=>'form-control','required'])}}
-                            @if ($errors->has('name'))
-                                <span class="text-danger">{{$errors->first('name')}}</span>
-                            @endif
+                            @if ($errors->hasBag('editcourse_' . $instructor->id) && $errors->getBag('editcourse_' . $instructor->id)->has('name'))
+                            <span class="text-danger">{{ $errors->getBag('editcourse_' . $instructor->id)->first('name') }}</span>
+                        @endif
                         </div>
                         <div class="col-12 col-md-3">
                             <label class="form-label" for="Specialization"> التخصص</label>
                             {{Form::text('Specialization',$instructor->Specialization,['id'=>'Specialization', 'class'=>'form-control','required'])}}
-                            @if ($errors->has('Specialization'))
-                                <span class="text-danger">{{$errors->first('Specialization')}}</span>
-                            @endif
+                            @if ($errors->hasBag('editcourse_' . $instructor->id) && $errors->getBag('editcourse_' . $instructor->id)->has('Specialization'))
+                            <span class="text-danger">{{ $errors->getBag('editcourse_' . $instructor->id)->first('Specialization') }}</span>
+                        @endif
                         </div>
 
                         <div class="col-12 col-md-3">
                             <label class="form-label" for="email"> الايميل</label>
                             {{Form::text('email',$instructor->email,['id'=>'email', 'class'=>'form-control','required'])}}
-                            @if ($errors->has('email'))
-                                <span class="text-danger">{{$errors->first('email')}}</span>
-                            @endif
+                            @if ($errors->hasBag('editcourse_' . $instructor->id) && $errors->getBag('editcourse_' . $instructor->id)->has('email'))
+                            <span class="text-danger">{{ $errors->getBag('editcourse_' . $instructor->id)->first('email') }}</span>
+                        @endif
                         </div>
                         <!-- <div class="col-12 col-md-12">
                             <label class="form-label" for="bio_ar">تفاصيل عن المدرب بالعربية</label>
@@ -105,10 +112,9 @@
                         <div class="col-12 col-md-12">
                             <label class="form-label" for="Phone">phone</label>
                             {{Form::text('Phone',$instructor->Phone,['id'=>'Phone', 'class'=>'form-control'])}}
-                            @if ($errors->has('Phone'))
-                                <span class="text-danger">{{$errors->first('Phone')}}</span>
-
-                            @endif
+                            @if ($errors->hasBag('editcourse_' . $instructor->id) && $errors->getBag('editcourse_' . $instructor->id)->has('Phone'))
+                            <span class="text-danger">{{ $errors->getBag('editcourse_' . $instructor->id)->first('Phone') }}</span>
+                        @endif
                         </div>
 
                         <div class="col-12"></div>
@@ -122,6 +128,9 @@
                                 <div class="file-loading">
                                     <input class="files" name="Photo" type="file">
                                 </div>
+                                @if ($errors->hasBag('editcourse_' . $instructor->id) && $errors->getBag('editcourse_' . $instructor->id)->has('Photo'))
+                            <span class="text-danger">{{ $errors->getBag('editcourse_' . $instructor->id)->first('Photo') }}</span>
+                        @endif
                             </div>
                         </div>
                         <div class="col-12 text-center mt-2 pt-50">
@@ -161,22 +170,22 @@
                         <div class="col-12 col-md-3">
                             <label class="form-label" for="name">{{trans('common.name_ar')}}</label>
                             {{Form::text('name','',['id'=>'name', 'class'=>'form-control','required'])}}
-                            @if ($errors->has('name'))
-                                <span class="text-danger">{{$errors->first('name')}}</span>
+                            @if ($errors->createcourse->has('name'))
+                                <span class="text-danger">{{ $errors->createcourse->first('name') }}</span>
                             @endif
                         </div>
                         <div class="col-12 col-md-3">
                             <label class="form-label" for="Specialization"> التخصص</label>
                             {{Form::text('Specialization','',['id'=>'Specialization', 'class'=>'form-control','required'])}}
-                            @if ($errors->has('Specialization'))
-                                <span class="text-danger">{{$errors->first('Specialization')}}</span>
+                            @if ($errors->createcourse->has('Specialization'))
+                                <span class="text-danger">{{ $errors->createcourse->first('Specialization') }}</span>
                             @endif
                         </div>
                         <div class="col-12 col-md-3">
                             <label class="form-label" for="email"> الايميل</label>
                             {{Form::text('email','',['id'=>'email', 'class'=>'form-control','required'])}}
-                            @if ($errors->has('email'))
-                                <span class="text-danger">{{$errors->first('email')}}</span>
+                            @if ($errors->createcourse->has('email'))
+                                <span class="text-danger">{{ $errors->createcourse->first('email') }}</span>
                             @endif
                         </div>
                         <!-- <div class="col-12 col-md-12">
@@ -193,9 +202,8 @@
                         <div class="col-12 col-md-12">
                             <label class="form-label" for="Phone">phone</label>
                             {{Form::text('Phone','',['id'=>'Phone', 'class'=>'form-control'])}}
-                            @if ($errors->has('Phone'))
-                                <span class="text-danger">{{$errors->first('Phone')}}</span>
-
+                            @if ($errors->createcourse->has('Phone'))
+                                <span class="text-danger">{{ $errors->createcourse->first('Phone') }}</span>
                             @endif
                         </div>
 
@@ -207,6 +215,9 @@
                                 <div class="file-loading">
                                     <input class="files" name="Photo" type="file">
                                 </div>
+                                @if ($errors->createcourse->has('Photo'))
+                                <span class="text-danger">{{ $errors->createcourse->first('Photo') }}</span>
+                            @endif
                             </div>
                         </div>
                         <div class="col-12 text-center mt-2 pt-50">
@@ -222,9 +233,19 @@
             </div>
         </div>
     </div>
+    @if ($errors->createcourse->any())
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = new bootstrap.Modal(document.getElementById('createcourse'));
+        modal.show();
+    });
+</script>
+@endif
 @stop
 
 @section('scripts')
 <script src="{{asset('AdminAssets/app-assets/js/scripts/pages/modal-add-course.js')}}"></script>
+
+
 
 @stop

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('new_instructors_new_courses', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('new_instructors_id');
+            $table->unsignedBigInteger('new_courses_id');
             $table->foreignId('new_instructors_id')->constrained('new_courses')->onDelete('cascade');
             $table->foreignId('new_courses_id')->constrained('new_instructors')->onDelete('cascade');
             $table->timestamps();

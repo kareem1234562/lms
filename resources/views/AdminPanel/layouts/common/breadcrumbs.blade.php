@@ -3,9 +3,7 @@
             <h2 class="content-header-title float-start mb-0">{{$title}}</h2>
             <div class="breadcrumb-wrapper">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="{{route('admin.index')}}">{{trans('common.PanelHome')}}</a>
-                    </li>
+               
                     @if(isset($breadcrumbs))
                         @foreach($breadcrumbs as $item)
                             @if($item['url'] != '')

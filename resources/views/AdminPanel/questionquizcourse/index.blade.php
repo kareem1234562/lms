@@ -66,83 +66,87 @@
 
         <td class="text-center">
     @if (in_array($fileExtension1, ['jpg', 'jpeg', 'png', 'gif']))
-        <img src="{{ asset('uploads/OptionsCourse/' . $question->option1) }}" alt="Image" width="100">
+        <img src="{{ asset('uploads/OptionsCourse/option1/' . $question->option1) }}" alt="Image" width="100">
     @elseif (in_array($fileExtension1, ['mp4', 'webm', 'ogg']))
         <video width="200" controls>
-            <source src="{{ asset('uploads/OptionsCourse/' . $question->option1) }}" type="video/{{ $fileExtension1 }}">
+            <source src="{{ asset('uploads/OptionsCourse/option1/' . $question->option1) }}" type="video/{{ $fileExtension1 }}">
             Your browser does not support the video tag.
         </video>
     @elseif (in_array($fileExtension1, ['mp3', 'wav', 'ogg']))
         <audio controls>
-            <source src="{{ asset('uploads/OptionsCourse/' . $question->option1) }}" type="audio/{{ $fileExtension1 }}">
+            <source src="{{ asset('uploads/OptionsCourse/option1/' . $question->option1) }}" type="audio/{{ $fileExtension1 }}">
             Your browser does not support the audio tag.
         </audio>
     @else
         {{ $question->option1 }}
     @endif
         </td>
+
         <td class="text-center">
     @if (in_array($fileExtension2, ['jpg', 'jpeg', 'png', 'gif']))
-        <img src="{{ asset('uploads/OptionsCourse/' . $question->option2) }}" alt="Image" width="100">
+        <img src="{{ asset('uploads/OptionsCourse/option2/' . $question->option2) }}" alt="Image" width="100">
     @elseif (in_array($fileExtension2, ['mp4', 'webm', 'ogg']))
         <video width="200" controls>
-            <source src="{{ asset('uploads/OptionsCourse/' . $question->option2) }}" type="video/{{ $fileExtension2 }}">
+            <source src="{{ asset('uploads/OptionsCourse/option2/' . $question->option2) }}" type="video/{{ $fileExtension2 }}">
             Your browser does not support the video tag.
         </video>
     @elseif (in_array($fileExtension2, ['mp3', 'wav', 'ogg']))
         <audio controls>
-            <source src="{{ asset('uploads/OptionsCourse/' . $question->option2) }}" type="audio/{{ $fileExtension2 }}">
+            <source src="{{ asset('uploads/OptionsCourse/option2/' . $question->option2) }}" type="audio/{{ $fileExtension2 }}">
             Your browser does not support the audio tag.
         </audio>
     @else
         {{ $question->option2 }}
     @endif
         </td>
+
         <td class="text-center">
     @if (in_array($fileExtension3, ['jpg', 'jpeg', 'png', 'gif']))
-        <img src="{{ asset('uploads/OptionsCourse/' . $question->option3) }}" alt="Image" width="100">
+        <img src="{{ asset('uploads/OptionsCourse/option3/' . $question->option3) }}" alt="Image" width="100">
     @elseif (in_array($fileExtension3, ['mp4', 'webm', 'ogg']))
         <video width="200" controls>
-            <source src="{{ asset('uploads/OptionsCourse/' . $question->option3) }}" type="video/{{ $fileExtension3 }}">
+            <source src="{{ asset('uploads/OptionsCourse/option3/' . $question->option3) }}" type="video/{{ $fileExtension3 }}">
             Your browser does not support the video tag.
         </video>
     @elseif (in_array($fileExtension3, ['mp3', 'wav', 'ogg']))
         <audio controls>
-            <source src="{{ asset('uploads/OptionsCourse/' . $question->option3) }}" type="audio/{{ $fileExtension3 }}">
+            <source src="{{ asset('uploads/OptionsCourse/option3/' . $question->option3) }}" type="audio/{{ $fileExtension3 }}">
             Your browser does not support the audio tag.
         </audio>
     @else
         {{ $question->option3 }}
     @endif
         </td>
+
         <td class="text-center">
     @if (in_array($fileExtension4, ['jpg', 'jpeg', 'png', 'gif']))
-        <img src="{{ asset('uploads/OptionsCourse/' . $question->option4) }}" alt="Image" width="100">
+        <img src="{{ asset('uploads/OptionsCourse/option4/' . $question->option4) }}" alt="Image" width="100">
     @elseif (in_array($fileExtension4, ['mp4', 'webm', 'ogg']))
         <video width="200" controls>
-            <source src="{{ asset('uploads/OptionsCourse/' . $question->option4) }}" type="video/{{ $fileExtension4 }}">
+            <source src="{{ asset('uploads/OptionsCourse/option4/' . $question->option4) }}" type="video/{{ $fileExtension4 }}">
             Your browser does not support the video tag.
         </video>
     @elseif (in_array($fileExtension4, ['mp3', 'wav', 'ogg']))
         <audio controls>
-            <source src="{{ asset('uploads/OptionsCourse/' . $question->option4) }}" type="audio/{{ $fileExtension4 }}">
+            <source src="{{ asset('uploads/OptionsCourse/option4/' . $question->option4) }}" type="audio/{{ $fileExtension4 }}">
             Your browser does not support the audio tag.
         </audio>
     @else
         {{ $question->option4 }}
     @endif
         </td>
+
         <td class="text-center">
     @if (in_array($fileExtension5, ['jpg', 'jpeg', 'png', 'gif']))
-        <img src="{{ asset('uploads/OptionsCourse/' . $question->option5) }}" alt="Image" width="100">
+        <img src="{{ asset('uploads/OptionsCourse/option5/' . $question->option5) }}" alt="Image" width="100">
     @elseif (in_array($fileExtension5, ['mp4', 'webm', 'ogg']))
         <video width="200" controls>
-            <source src="{{ asset('uploads/OptionsCourse/' . $question->option5) }}" type="video/{{ $fileExtension5 }}">
+            <source src="{{ asset('uploads/OptionsCourse/option5/' . $question->option5) }}" type="video/{{ $fileExtension5 }}">
             Your browser does not support the video tag.
         </video>
     @elseif (in_array($fileExtension5, ['mp3', 'wav', 'ogg']))
         <audio controls>
-            <source src="{{ asset('uploads/OptionsCourse/' . $question->option5) }}" type="audio/{{ $fileExtension5 }}">
+            <source src="{{ asset('uploads/OptionsCourse/option5/' . $question->option5) }}" type="audio/{{ $fileExtension5 }}">
             Your browser does not support the audio tag.
         </audio>
     @else
@@ -267,13 +271,13 @@
             <div id="inputWrapper{{ $i }}">
                 @if (in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif']))
                     <!-- Display image -->
-                    <img src="{{ asset('uploads/OptionsCourse/' . $optionValue) }}" alt="Image" width="100">
+                    <img src="{{ asset('uploads/OptionsCourse/option'.$i.'/' . $optionValue) }}" alt="Image" width="100">
                     {{ Form::file('option'.$i, ['id' => 'option'.$i, 'class' => 'form-control']) }}
 
                 @elseif (in_array($fileExtension, ['mp4', 'webm', 'ogg']))
                     <!-- Display video -->
                     <video width="200" controls>
-                        <source src="{{ asset('uploads/OptionsCourse/' . $optionValue) }}" type="video/{{ $fileExtension }}">
+                        <source src="{{ asset('uploads/OptionsCourse/option'.$i.'/' . $optionValue) }}" type="video/{{ $fileExtension }}">
                         Your browser does not support the video tag.
                     </video>
                     <br>
@@ -282,7 +286,7 @@
                 @elseif (in_array($fileExtension, ['mp3', 'wav', 'ogg']))
                     <!-- Display audio -->
                     <audio controls>
-                        <source src="{{ asset('uploads/OptionsCourse/' . $optionValue) }}" type="audio/{{ $fileExtension }}">
+                        <source src="{{ asset('uploads/OptionsCourse/option'.$i.'/' . $optionValue) }}" type="audio/{{ $fileExtension }}">
                         Your browser does not support the audio element.
                     </audio>
                     <br>
@@ -418,8 +422,7 @@
                             <label class="form-label" for="option{{ $i }}">{{ trans('الاجابه') }} {{ $i }}</label>
 
                             <div id="inputWrapper{{ $i }}">
-                                <input type="text" name="option{{ $i }}" id="option{{ $i }}" class="form-control"
-                                    {{ $i <= 3 ? 'required' : '' }}>
+                                <input type="text" name="option{{ $i }}"id="option{{$i}}"class="form-control" {{ $i <= 3 ? 'required' : '' }}>
                             </div>
                         </div>
                     @endfor
@@ -427,15 +430,7 @@
 
 
 
-                        <!-- <div class="col-12"></div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="details_ar">{{trans('common.des_ar')}}</label>
-                            {!!Form::textarea('details_ar','',['id'=>'details_ar', 'class'=>'form-control editor_ar'])!!}
-                        </div> -->
-                        <!-- <div class="col-12 col-md-12">
-                            <label class="form-label" for="details_en">{{trans('common.des_en')}}</label>
-                            {!!Form::textarea('details_en','',['id'=>'details_en', 'class'=>'form-control editor_ar'])!!}
-                        </div> -->
+
                                                 <div class="col-12 col-md-3">
                             <label class="form-label" for="correct_answer">{{ trans('الاجابه الصحيحه') }}</label>
 
@@ -449,10 +444,7 @@
                             </div>
                         </div>
 
-                        <!-- <div class="col-12 col-md-12">
-                            <label class="form-label" for="seo_keywords">SEO الكلمات الدليلية</label>
-                            {!!Form::textarea('seo_keywords','',['id'=>'seo_keywords', 'class'=>'form-control','rows'=>'3'])!!}
-                        </div> -->
+
 
                         <div class="row d-flex justify-content-center">
 
@@ -488,21 +480,30 @@
 </script>
 
 <script>
-    function changeAllInputs(type) {
-        for (let i = 1; i <= 5; i++) {
-            const inputWrapper = document.getElementById(`inputWrapper${i}`);
+function changeAllInputs(type) {
+    for (let i = 1; i <= 5; i++) {
+        const inputWrapper = document.getElementById(`inputWrapper${i}`);
 
-            // Clear existing content in the wrapper
-            inputWrapper.innerHTML = '';
+        // Clear existing content in the wrapper
+        inputWrapper.innerHTML = '';
 
-            // Add the appropriate input based on the selected type
-            if (type === 'text') {
-                inputWrapper.innerHTML = `<input type="text" name="option${i}" id="option${i}" class="form-control" required>`;
-            } else if (type === 'file') {
-                inputWrapper.innerHTML = `<input type="file" name="option${i}" id="option${i}" class="form-control" required>`;
-            }
+        // Create a new input element
+        const input = document.createElement('input');
+        input.name = `option${i}`;
+        input.id = `option${i}`;
+        input.className = 'form-control';
+        input.type = type;
+
+        // Set the 'required' attribute for the first three inputs
+        if (i <= 3) {
+            input.setAttribute('required', '');
         }
+
+        // Append the new input to the wrapper
+        inputWrapper.appendChild(input);
     }
+}
+
 </script>
 
 <script>

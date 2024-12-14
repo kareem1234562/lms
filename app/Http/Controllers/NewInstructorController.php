@@ -23,7 +23,7 @@ class NewInstructorController extends Controller
             'breadcrumbs' => [
                 [
                     'url' => '',
-                    'text' => 'الدورات التدريبية'
+                    'text' => ' '
                 ]
             ]
         ]);
@@ -43,18 +43,21 @@ class NewInstructorController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3|max:30',
-            'email' => 'required|email|unique:new_instructors',
-            'Phone' => 'required|unique:new_instructors|numeric|min:11',
-            'Photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
 
-        if ($validator->fails()) {
-           return redirect()->back()->withErrors($validator)->withInput();
-        }
+                        $validator = Validator::make($request->all(), [
+                            'name' => 'required|min:3|max:30',
+                            'email' => 'required|email|unique:new_instructors',
+                            'Phone' => 'required|unique:new_instructors|numeric|min:11',
+                            'Photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                        ]);
+
+                        if ($validator->fails()) {
+                            return redirect()->back()
+                                ->withErrors($validator, 'createcourse')
+                                ->withInput();
+                        }
                         $instructor = $request->except(['_token']);
-                        $image = upload_image_without_resize('instructors/', $request->Photo);
+                        $image = upload_file('instructors/', $request->Photo);
                         $instructor['Photo'] = $image;
 
                         // Step 3: Save the data in the database
@@ -91,6 +94,20 @@ class NewInstructorController extends Controller
     public function update(Request $request,  $id)
     {
         $instructor = NewInstructors::find($id);
+
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:3|max:30',
+            'email' => 'required|email|unique:new_instructors,email,' . $instructor->id,
+            'Phone' => 'required|numeric|min:11|unique:new_instructors,Phone,' . $instructor->id,
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator, 'editcourse_'.$instructor->id)
+                ->withInput();
+        }
+
         $data = $request->except(['_token', 'Photo']); // Exclude Photo if it's not being updated
 
         if ($request->hasFile('Photo')) {
@@ -104,21 +121,6 @@ class NewInstructorController extends Controller
         } else {
             return redirect()->back()->with('faild', 'لم يتم تعديل المحاضر بنجاح');
         }
-        // $request->validate([
-        //     'name' => 'required|min:3|max:30',
-        //     'email' => [
-        //         'required',
-        //         'email',
-        //         Rule::unique('new_instructors')->ignore($id), // Exclude current record by ID
-        //     ],
-        //     'Phone' => [
-        //         'required',
-        //         'numeric',
-        //         'min:11',
-        //         Rule::unique('new_instructors')->ignore($id), // Exclude current record by ID
-        //     ],
-        //     'Photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ]);
 
 
 

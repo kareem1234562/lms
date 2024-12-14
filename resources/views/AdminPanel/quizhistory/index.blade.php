@@ -16,6 +16,7 @@
                                 <th>{{trans('common.name')}}</th>
                                 <th>{{trans('course')}}</th>
                                 <th>{{trans('lesson')}}</th>
+                                <th>{{trans('seperate')}}</th>
 
 
 
@@ -34,6 +35,9 @@
                                       </td>
                                       <td>
                                       {{$quize->lesson_id}}
+                                      </td>
+                                      <td>
+                                      {{$quize->seperate_id}}
                                       </td>
 
                                     <td class="text-center">

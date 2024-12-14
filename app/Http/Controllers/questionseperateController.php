@@ -20,7 +20,7 @@ class questionseperateController extends Controller
         $questions=$quiz->questions()->paginate(10);
         return view('AdminPanel.questionseperate.index',[
             'active' => 'new courses',
-            'title' => 'الدورات التدريبية',
+            'title' => 'question seperate ',
             'quiz_id'=>$quiz_id,
             'questions' => $questions,
             'breadcrumbs' => [
@@ -62,12 +62,9 @@ class questionseperateController extends Controller
         }
 
 
-        $options = ['option1', 'option2', 'option3', 'option4', 'option5'];
-        foreach ($options as $option) {
-            if ($request->hasFile($option)) {
-                $data[$option] = upload_file('OptionsCourse', $request->$option);
-            }else{
-                $data[$option] = $request->$option;
+        for ($i = 1; $i <= 5; $i++) {
+            if ($request->hasFile("option$i")) {
+                $data["option$i"] = upload_file("OptionsCourse/option$i", $request->file("option$i"));
             }
         }
 
@@ -123,7 +120,7 @@ class questionseperateController extends Controller
 
         foreach ($options as $option) {
             if ($request->hasFile($option)) {
-                $data[$option] = upload_file('OptionsCourse', $request->$option);
+                $data[$option] = upload_file('OptionsCourse/'.$option, $request->$option);
             } elseif (isset($request->$option) && $request->$option != $question->$option) {
                 $data[$option] = $request->$option;
             } else {

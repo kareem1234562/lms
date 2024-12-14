@@ -20,12 +20,12 @@ class SeperateQuiz extends Controller
         $quizes = ModelsSeperateQuiz::paginate(10);
         return view('AdminPanel.quizseperate.index',[
             'active' => 'new courses',
-            'title' => 'الدورات التدريبية',
+            'title' => 'quiz seperate',
             'quizes' => $quizes,
             'breadcrumbs' => [
                 [
                     'url' => '',
-                    'text' => 'الدورات التدريبية'
+                    'text' => ' '
                 ]
             ]
         ]);

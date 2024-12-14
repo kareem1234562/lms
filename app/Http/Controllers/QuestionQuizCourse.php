@@ -20,7 +20,7 @@ class QuestionQuizCourse extends Controller
         $questions=$quiz->questions()->paginate(10);
         return view('AdminPanel.questionquizcourse.index',[
             'active' => 'new courses',
-            'title' => 'الدورات التدريبية',
+            'title' => 'question quiz course ',
             'quiz_id'=>$quiz_id,
             'questions' => $questions,
             'breadcrumbs' => [
@@ -62,13 +62,15 @@ class QuestionQuizCourse extends Controller
                 $data['correct_answer'] = upload_file('Correct_AnswerCourse', $request->correct_answer);
             }
             // Handle option files (option1, option2, option3, etc.)
-            if ($request->hasFile('option1')) {
-                for ($i = 1; $i <= 5; $i++) {
-                    if ($request->hasFile("option$i")) {
-                        $data["option$i"] = upload_file('OptionsCourse', $request->file("option$i"));
-                    }
+
+            for ($i = 1; $i <= 5; $i++) {
+                if ($request->hasFile("option$i")) {
+                    $data["option$i"] = upload_file("OptionsCourse/option$i", $request->file("option$i"));
                 }
             }
+
+
+
             // Save the data into the database
             $store = QuestionCourse::create($data);
 
@@ -118,7 +120,7 @@ class QuestionQuizCourse extends Controller
 
         foreach ($options as $option) {
             if ($request->hasFile($option)) {
-                $data[$option] = upload_file('OptionsCourse', $request->$option);
+                $data[$option] = upload_file('OptionsCourse/'.$option, $request->$option);
             } elseif (isset($request->$option) && $request->$option != $question->$option) {
                 $data[$option] = $request->$option;
             } else {

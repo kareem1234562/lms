@@ -23,7 +23,7 @@ class QuizCourseController extends Controller
 
         return view('AdminPanel.quizescourse.index',[
             'active' => 'new courses',
-            'title' => 'الدورات التدريبية',
+            'title' => 'quizes course',
             'course_id'=>$course_id,
             'quizes' => $quizes,
             'breadcrumbs' => [
