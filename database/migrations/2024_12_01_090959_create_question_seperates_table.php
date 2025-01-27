@@ -16,7 +16,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('icon');
             $table->string('question');
-            $table->string('options');
+            $table->string('option1');
+            $table->string('option2');
+            $table->string('option3');
+            $table->string('option4');
+            $table->string('option5');
             $table->string('correct_answer');
             $table->foreignId('seperate_id')->constrained('seperate_quizzes')->cascadeOnDelete();
             $table->timestamps();

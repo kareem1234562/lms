@@ -15,9 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('icon');
-            $table->string('question');
-            $table->string('Options');
-            $table->string('Correct answer');
             $table->foreignId('lesson_id')->constrained('new__lessons')->cascadeOnDelete();
             $table->timestamps();
         });

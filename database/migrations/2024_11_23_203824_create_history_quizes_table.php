@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('history_quizes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('course')->nullable();
-            $table->string('lesson')->nullable();
-            $table->text('number of questions')->nullable();
+            $table->string('icon');
+            $table->string('course_id')->nullable();
+            $table->string('separate_id')->nullable();
+            $table->string('lesson_id')->nullable();
             $table->timestamps();
         });
     }

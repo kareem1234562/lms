@@ -15,9 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('icon');
-            $table->string('question');
-            $table->string('Options');
-            $table->string('answer');
             $table->foreignId('course_id')->constrained('new_courses')->cascadeOnDelete();
             $table->timestamps();
         });

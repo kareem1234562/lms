@@ -15,9 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('icon');
-            $table->string('question');
-            $table->string('option');
-            $table->string('answer');
             $table->timestamps();
         });
     }
